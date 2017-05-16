@@ -6,7 +6,7 @@
 
     <string name="action_settings">Settings</string>
     <string name="connectionproblem">There\'s a Problem on Connection</string>
-    <!-- these strings for lables in school profile-->
+    <!-- these strings for lables in co_working_space profile-->
     <string name="name">Name</string>
     <string name="locatoin">Location</string>
     <string name="city">City</string>

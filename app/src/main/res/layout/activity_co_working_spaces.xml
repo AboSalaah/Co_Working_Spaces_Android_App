@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,10 +8,18 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:id="@+id/schools_list_view"
-    tools:context=".Activities.Schools"
+    tools:context=".Activities.Co_Working_Spaces"
     android:background="@color/dbsecolor"
-    android:dividerHeight="@dimen/spacing_list_view"
+    android:orientation="vertical"
     >
 
-</ListView>
+    <ListView
+        android:id="@+id/co_working_spaces_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:dividerHeight="@dimen/spacing_list_view"
+        >
+
+    </ListView>
+
+</LinearLayout>

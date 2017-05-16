@@ -18,8 +18,8 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
-    <!-- Style for School item in Schools list-->
-    <style name="school">
+    <!-- Style for Co_Working_Space item in Co_Working_Spaces list-->
+    <style name="coWorkingSpace">
         <item name="android:textSize">25sp</item>
         <item name="android:textColor">#ffffff</item>
         <item name="android:padding">20dp</item>
@@ -85,6 +85,14 @@
         <item name="android:layout_marginBottom">20dp</item>
         <item name="android:layout_centerHorizontal">true</item>
         <item name="android:padding">10dp</item>
+    </style>
+
+    <!-- Style for School item in Coworking spaces list-->
+    <style name="coworkingspace">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:padding">20dp</item>
+
     </style>
 
 </resources>

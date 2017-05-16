@@ -10,9 +10,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 
+import com.example.ahmedsaleh.dbse_schools.Helpers.Co_Working_Space;
 import com.example.ahmedsaleh.dbse_schools.R;
-import com.example.ahmedsaleh.dbse_schools.Helpers.School;
-import com.example.ahmedsaleh.dbse_schools.Adapters.SchoolAdapter;
+import com.example.ahmedsaleh.dbse_schools.Adapters.Co_Working_Spaces_Adapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,28 +26,34 @@ import okhttp3.OkHttpClient;
 
 import okhttp3.Callback;
 import okhttp3.Response;
-public class Schools extends AppCompatActivity {
+public class Co_Working_Spaces extends AppCompatActivity {
     private StringBuilder Url=new StringBuilder();
     private String result;
-    private SchoolAdapter schoolAdapter;
+    private Co_Working_Spaces_Adapter coWorkingSpacesAdapter;
     private ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_schools);
-        listView=(ListView)findViewById(R.id.schools_list_view);
+        setContentView(R.layout.activity_co_working_spaces);
+        listView=(ListView)findViewById(R.id.co_working_spaces_list_view);
         final Intent intent=getIntent();
         String govname=intent.getStringExtra("name");
-        ArrayList<School>arr=new ArrayList<>();
-       arr.add(new School("radwa","1"));
-       schoolAdapter=new SchoolAdapter(this,new ArrayList<School>());
-        listView.setAdapter(schoolAdapter);
+        ArrayList<Co_Working_Space>arr=new ArrayList<>();
+        arr.add(new Co_Working_Space("creativo","1",3));
+        arr.add(new Co_Working_Space("creativo","1",2));
+        arr.add(new Co_Working_Space("creativo","1",1.5f));
+        arr.add(new Co_Working_Space("creativo","1",1.4f));
+        arr.add(new Co_Working_Space("creativo","1",5));
+        arr.add(new Co_Working_Space("creativo","1",4));
+        arr.add(new Co_Working_Space("creativo","1",0.5f));
+       coWorkingSpacesAdapter =new Co_Working_Spaces_Adapter(this,new ArrayList<Co_Working_Space>(arr));
+        listView.setAdapter(coWorkingSpacesAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                School school=(School)parent.getItemAtPosition(position);
-                Intent intent=new Intent(Schools.this,School_Profile.class);
-                intent.putExtra("id",school.getmId());
+                Co_Working_Space coWorkingSpace =(Co_Working_Space)parent.getItemAtPosition(position);
+                Intent intent=new Intent(Co_Working_Spaces.this,School_Profile.class);
+                intent.putExtra("id", coWorkingSpace.getmId());
                 startActivity(intent);
             }
         });
@@ -82,7 +88,7 @@ public class Schools extends AppCompatActivity {
                         public void run() {
                             try {
                                 Log.i("tag","resultttt  "+result);
-                                ArrayList<School>schools=new ArrayList<School>();
+                                ArrayList<Co_Working_Space> coWorkingSpaces =new ArrayList<Co_Working_Space>();
                                 JSONArray jsonArray=new JSONArray(result);
                                 for(int i=0;i<jsonArray.length();++i)
                                 {
@@ -96,16 +102,16 @@ public class Schools extends AppCompatActivity {
                                             if(jsonObject.has("logo")&&!jsonObject.getString("logo").equals("null")&&jsonObject.getString("logo").contains("storage"))
                                             {
                                                 String schoollogo=getString(R.string.imageurl)+jsonObject.getString("logo");
-                                                schools.add(new School(schoolname,schoolid,schoollogo));
+                                                //coWorkingSpaces.add(new Co_Working_Space(schoolname,schoolid,schoollogo));
 
                                             }
                                         }
                                     }
                                 }
-                                Log.i("tag","size el araaay "+schools.size());
-                                schoolAdapter.clear();
-                                schoolAdapter.addAll(schools);
-                                schoolAdapter.notifyDataSetChanged();
+                                Log.i("tag","size el araaay "+ coWorkingSpaces.size());
+                                coWorkingSpacesAdapter.clear();
+                                coWorkingSpacesAdapter.addAll(coWorkingSpaces);
+                                coWorkingSpacesAdapter.notifyDataSetChanged();
 
                             } catch (JSONException e) {
                                 e.printStackTrace();

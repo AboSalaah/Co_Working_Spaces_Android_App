@@ -13,10 +13,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.ahmedsaleh.dbse_schools.Activities.Schools;
+import com.example.ahmedsaleh.dbse_schools.Activities.Co_Working_Spaces;
 import com.example.ahmedsaleh.dbse_schools.Activities.SignIn;
 import com.example.ahmedsaleh.dbse_schools.Adapters.Governorates_Adapter;
-import com.example.ahmedsaleh.dbse_schools.Helpers.School;
 import com.example.ahmedsaleh.dbse_schools.R;
 
 import org.json.JSONArray;
@@ -70,7 +69,7 @@ public class HomeFragement extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String Governorate =(String) parent.getItemAtPosition(position);
-                Intent intent=new Intent(getContext(),Schools.class);
+                Intent intent=new Intent(getContext(),Co_Working_Spaces.class);
                 intent.putExtra("name",Governorate);
                 startActivity(intent);
 

@@ -12,6 +12,8 @@ import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.ahmedsaleh.dbse_schools.R;
+
 import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
@@ -96,5 +98,17 @@ public class QueryUtils {
 
         }
 
+    }
+
+
+    public static int getRatingBarColor(float rating)
+    {
+        if(rating<=0)return R.color.notselectedstarscolor;
+        else if(rating>0&&rating<=1)return R.color.firstdegreeratingbar;
+        else if(rating>1&&rating<=2)return R.color.seconddegreeratingbar;
+        else if(rating>2&&rating<=3)return R.color.thirddegreeratingbar;
+        else if(rating>3&&rating<=4)return R.color.fourthdegreeratingbar;
+        else if(rating>4&&rating<=5)return R.color.fifthdegreeratingbar;
+        return R.color.fifthdegreeratingbar;
     }
 }

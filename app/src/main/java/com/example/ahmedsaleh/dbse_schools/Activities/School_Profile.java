@@ -45,7 +45,7 @@ public class School_Profile extends AppCompatActivity {
                 QueryUtils.showLocationOnMap(getApplicationContext(),lat,lon,location);
             }
         });
-       Url.append(getString(R.string.url)+"school/"+schoolid+"?token="+SignIn.token);
+       Url.append(getString(R.string.url)+"co_working_space/"+schoolid+"?token="+SignIn.token);
         //connect();
 
     }
@@ -73,7 +73,7 @@ public class School_Profile extends AppCompatActivity {
                         try {
                             Log.i("tag","resulttttt "+result);
                             JSONObject jsonObject=new JSONObject(result);
-                            JSONObject jsonObject1=jsonObject.getJSONObject("school");
+                            JSONObject jsonObject1=jsonObject.getJSONObject("co_working_space");
                             TextView schoolnamelabel=(TextView)findViewById(R.id.school_profile_name_label);
                             TextView schoolname=(TextView)findViewById(R.id.school_profile_name);
                             if(jsonObject1.has("name")&&!jsonObject1.getString("name").equals("null"))

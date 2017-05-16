@@ -24,7 +24,7 @@
 
         </activity>
         <activity android:name=".Activities.SignUp" />
-        <activity android:name=".Activities.Schools"
+        <activity android:name=".Activities.Co_Working_Spaces"
             android:label="@string/listofschoolsactivityname"
 
             >
