@@ -1,0 +1,90 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <!-- Style for School item in Schools list-->
+    <style name="school">
+        <item name="android:textSize">25sp</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:padding">20dp</item>
+
+    </style>
+
+
+    <!-- style for labels in item_profile-->
+    <style name="labels_profile_style">
+        <item name="android:textSize">@dimen/labelstextsizeforprofile</item>
+        <item name="android:background">@drawable/labelrectangularshape</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:padding">@dimen/itempadding</item>
+    </style>
+    <!--style for the item attributes in item profile-->
+    <style name="item_attributes">
+        <item name="android:textSize">@dimen/itemattributetextsize</item>
+        <item name="android:background">@drawable/rectangularshape</item>
+        <item name="android:padding">@dimen/itempadding</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+    <!-- sytle for governorate_list_view_item-->
+    <style name="list_view_item">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:padding">@dimen/governoratelistpadding</item>
+        <item name="android:layout_centerHorizontal">true</item>
+
+    </style>
+
+    <style name="DbseLogo">
+        <item name="android:textSize">100sp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="SignIntextstyle">
+        <item name="android:textSize">35sp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!-- this define a style for the word create your account in signup form.-->
+    <style name="SignUptextstyle">
+        <item name="android:textSize">35sp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="edittext_sign_in_up_style">
+        <item name="android:layout_height">@dimen/edittexthieghtsignup</item>
+        <item name="android:layout_width">@dimen/edittextwidthsignup</item>
+        <item name="android:background">@drawable/roundedborder</item>
+        <item name="android:layout_marginBottom">20dp</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+</resources>

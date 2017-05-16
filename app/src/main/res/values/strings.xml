@@ -1,0 +1,75 @@
+<resources>
+    <string name="app_name">DbSE_Schools</string>
+    <string name="DbSE">DbSE</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="connectionproblem">There\'s a Problem on Connection</string>
+    <!-- these strings for lables in school profile-->
+    <string name="name">Name</string>
+    <string name="locatoin">Location</string>
+    <string name="city">City</string>
+    <string name="contacts">Contacts</string>
+    <string name="website">Website</string>
+    <string name="facebook_page">FacebookPage</string>
+    <string name="description">Description</string>
+    <string name="classification">Classification</string>
+    <string name="fees">Fees</string>
+    <string name="locationonmap">Location On Map</string>
+    <string name="others">Others</string>
+    <string name="token">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL2xvY2FsaG9zdFwvZGJzZVwvcHVibGljXC9hcGlcL3YxXC9zaWduaW4iLCJpYXQiOjE0OTI5ODI2MjQsImV4cCI6MTQ5Mjk4NjIyNCwibmJmIjoxNDkyOTgyNjI0LCJqdGkiOiJ5WnhZOExLbmJwY0tuWFNwIn0.SnAnlH8Djk2abGAe2nqmvfrwYDgr0zOA8Bja0uYu5dc</string>
+    <string name="imageurl">http://e7f5836e.ngrok.io/dbse/public/</string>
+    <string name="your_string_here">
+        <u>LocationOnMap</u>.
+    </string>
+    <string name="listofschoolsactivityname">Schools</string>
+    <string name="listofgovernorates">Governorates</string>
+    <string name="schoolprofile">SchoolProfile</string>
+
+    <string name="action_logout">Sign Out</string>
+    <string name="register1">Create your</string>
+    <string name="register2">account!</string>
+
+    <!--these strings define hints for edit texts in singup form-->
+    <string name="signupemail">E-mail</string>
+    <string name="signuppassword">Password</string>
+    <string name="singupusername">UserName</string>
+
+    <!--these strings define hints for edit texts in edit profile form-->
+    <string name="old_email">Old e-mail</string>
+    <string name="old_password">Old password</string>
+    <string name="new_email">New e-mail</string>
+    <string name="new_password">New password</string>
+    <string name="new_username">New userName</string>
+    <string name="save_changes">Save changes</string>
+
+    <!--string for create account button-->
+    <string name="createaccount">Create Account</string>
+    <string name="next">NEXT</string>
+    <string name="hint_real_name">Real Name</string>
+    <string name="emptyerror">Should not be blank</string>
+    <string name="confirmationcode">Confirmation Code</string>
+    <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
+    <string name="change">change</string>
+
+    <!--these strings for Sign in activity-->
+    <string name="sign_in_email_hint">E-mail</string>
+    <string name="sign_in_password_hint">Password</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="froget_pass">Forgotten Password?</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="sign_in_title">Private Schools</string>
+    <string name="contacts_text">Contancts</string>
+    <string name="facebook">Facebook Page</string>
+    <string name="forget_pass_title1">We will send a new password</string>
+    <string name="emailORusername">UserName or e-mail</string>
+
+
+    <string name="url">http://6588b843.ngrok.io/dbse/public/api/v1/</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

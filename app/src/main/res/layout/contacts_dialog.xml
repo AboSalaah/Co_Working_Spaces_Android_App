@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/Facebook_dialog"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/fb_logo"
+        android:clickable="true"
+        android:padding="16dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"/>
+    <TextView
+        android:id="@+id/Dbse_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/DbSE"
+        android:clickable="true"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:padding="32dp"
+        android:layout_marginTop="16dp"/>
+
+</LinearLayout>

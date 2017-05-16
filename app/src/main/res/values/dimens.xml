@@ -1,0 +1,26 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="nav_header_vertical_spacing">16dp</dimen>
+    <dimen name="nav_header_height">160dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <!-- represent the width and height of image in school list-->
+    <dimen name="image_school_list">90dp</dimen>
+
+    <dimen name="labelstextsizeforprofile">30dp</dimen>
+    <dimen name="itemattributetextsize">25dp</dimen>
+    <dimen name="itempadding">10dp</dimen>
+    <dimen name="logoforprofile">50dp</dimen>
+    <!-- spacing between items in schools list view-->
+    <dimen name="spacing_list_view">7.0sp</dimen>
+    <!-- padding in text in governorate list-->
+    <dimen name="governoratelistpadding">30dp</dimen>
+    <dimen name="edittextwidthsignup">300dp</dimen>
+    <dimen name="edittexthieghtsignup">50dp</dimen>
+
+
+
+</resources>
