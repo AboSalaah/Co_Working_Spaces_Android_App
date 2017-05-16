@@ -33,6 +33,7 @@ public class ViewProfileFragement extends Fragment {
     TextView firstLetter;
     String result=null;
     StringBuilder URL;
+    public static String userType;
 
     public ViewProfileFragement() {
         // Required empty public constructor

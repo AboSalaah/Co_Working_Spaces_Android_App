@@ -34,6 +34,7 @@ public class AboutDbseFragement extends Fragment {
     TextView website;
     String result=null;
     StringBuilder URL;
+    public static String userType;
 
 
     public AboutDbseFragement() {

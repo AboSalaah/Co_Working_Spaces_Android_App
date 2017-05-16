@@ -1,119 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/singuprelativelayout"
-    android:background="@color/dbsecolor"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".Activities.SignUp">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TextView
-            android:id="@+id/register1"
-            style="@style/SignUptextstyle"
-            android:text="@string/register1"
-            />
-        <TextView
-            android:id="@+id/register2"
-            style="@style/SignUptextstyle"
-            android:text="@string/register2"
-            android:layout_below="@id/register1"
-            android:layout_marginBottom="20dp"
-            />
+    tools:context=".Activities.SignUp"
+    android:background="@color/dbsecolor"
+    >
 
-        <LinearLayout
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/singuplinearlayout"
-            android:layout_below="@id/register2"
+            android:text="@string/register1"
+            android:textSize="@dimen/createyouraccounttextsize"
+            android:id="@+id/create_your"
             android:layout_centerHorizontal="true"
-            >
-            <EditText
-                style="@style/edittext_sign_in_up_style"
-                android:hint="@string/singupusername"
-                android:id="@+id/usernameedittext"
-                />
-            <EditText
-                style="@style/edittext_sign_in_up_style"
-                android:hint="@string/signupemail"
-                android:id="@+id/emailedittext"
-                />
-            <EditText
-                style="@style/edittext_sign_in_up_style"
-                android:hint="password (at least 8 ch)"
-                android:inputType="textPassword"
-                android:id="@+id/passwordedittext" />
-
-        </LinearLayout>
-        <Button
-            android:id="@+id/next_step"
-            android:layout_width="200dp"
+            android:textColor="@color/white"
+            />
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/next"
+            android:text="@string/register2"
+            android:textSize="@dimen/createyouraccounttextsize"
+            android:id="@+id/creat_your_account"
+            android:layout_below="@id/create_your"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/singuplinearlayout"
-            android:background="@drawable/roundedborder"
+            android:textColor="@color/white"
+            android:layout_marginBottom="@dimen/itempadding"
+            />
+        <EditText
+           style="@style/edittext_sign_in_up_style"
+            android:hint="@string/usernamehint"
+            android:id="@+id/signup_username"
+            android:layout_below="@id/creat_your_account"
+            />
+        <EditText
+          style="@style/edittext_sign_in_up_style"
+            android:hint="@string/emailhint"
+            android:id="@+id/signup_email"
+            android:layout_below="@id/signup_username"
             />
         <EditText
             style="@style/edittext_sign_in_up_style"
-            android:hint="@string/hint_real_name"
-            android:id="@+id/real_user_name_editText"
-            android:layout_below="@+id/singuplinearlayout"
-            android:visibility="invisible" />
-        <RelativeLayout
-            android:layout_width="wrap_content"
+            android:hint="@string/passwordhint"
+            android:inputType="textPassword"
+            android:id="@+id/signup_password"
+            android:layout_below="@id/signup_email"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:id="@+id/checkboxs_Relativelayout"
-            android:layout_below="@id/real_user_name_editText"
-            android:layout_centerHorizontal="true">
-            <CheckBox
-                android:id="@+id/male_checkbox"
+            android:layout_below="@id/signup_password"
+            android:id="@+id/spinner_signup_linear_layout"
+            >
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="32dp"
-                android:visibility="invisible"
-                android:clickable="false"
+                android:text="@string/typelabel"
                 android:textColor="@color/white"
-                android:text="Male" />
-            <CheckBox
-                android:id="@+id/female_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/male_checkbox"
-                android:visibility="invisible"
-                android:clickable="false"
-                android:textColor = "@color/white"
-                android:text="Female"/>
-            <Button
-                android:id="@+id/chooseGender"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="32dp"
-                android:text="@string/change"
-                android:background="@color/white"
-                android:visibility="invisible"
+                android:layout_marginRight="@dimen/typepadding"
                 />
+        <Spinner
+            android:layout_width="0dp"
+            android:layout_height="@dimen/edittexthieghtsignup"
+            android:id="@+id/signup_type_spinner"
+            style="@android:style/Widget.Spinner.DropDown"
 
-        </RelativeLayout>
+            android:layout_weight="1"
+            >
+
+        </Spinner>
+    </LinearLayout>
+
         <Button
-            android:id="@+id/createaccount_button"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/createaccount"
+            android:text="@string/nextbutton"
+            android:id="@+id/signup_first_next_button"
+            android:layout_below="@id/spinner_signup_linear_layout"
+            android:padding="@dimen/fab_margin"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/checkboxs_Relativelayout"
-            android:background="@drawable/roundedborder"
-            android:visibility="invisible"
-            android:layout_marginTop="8dp"
+            android:background="@color/buttonsignupcolor"
+            android:layout_margin="@dimen/itempadding"
             />
+
+
+
+        <EditText
+            style="@style/edittext_sign_in_up_style"
+            android:hint="@string/realnamehint"
+            android:id="@+id/signup_realname"
+            android:layout_below="@id/signup_first_next_button"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/gender_linear_layout"
+            android:layout_below="@id/signup_realname"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/genderlabel"
+                android:textColor="@color/white"
+                android:layout_margin="@dimen/itempadding"
+
+                />
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/signup_radio_group"
+            android:layout_weight="1"
+            android:layout_marginBottom="@dimen/itempadding"
+            >
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/signup_male_radio_button"
+                android:text="@string/maleradiobutton"
+                android:textColor="@color/white"
+                />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/signup_female_radio_button"
+                android:text="@string/femalerediobutton"
+                android:textColor="@color/white"
+                />
+        </RadioGroup>
+        </LinearLayout>
+
+        <EditText
+            style="@style/edittext_sign_in_up_style"
+            android:hint="@string/phonehing"
+            android:id="@+id/singup_phone_number"
+            android:layout_below="@id/gender_linear_layout"
+            android:inputType="phone"
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/signup_second_next_button"
+            android:text="@string/nextbutton"
+            android:layout_below="@id/singup_phone_number"
+            android:layout_centerHorizontal="true"
+            android:background="@color/buttonsignupcolor"
+            android:layout_margin="@dimen/itempadding"
+            />
+
+
     </RelativeLayout>
+
 </ScrollView>

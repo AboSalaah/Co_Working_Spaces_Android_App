@@ -24,7 +24,7 @@
             android:layout_below="@+id/dbse_logo"/>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:id="@+id/signinlinearlayout"
@@ -34,12 +34,22 @@
             <EditText
                 style="@style/edittext_sign_in_up_style"
                 android:id="@+id/signIn_user_email"
-                android:hint="@string/emailORusername"/>
+                android:hint="@string/emailORusername"
+                 />
             <EditText
                 style="@style/edittext_sign_in_up_style"
                 android:id="@+id/signIn_password"
                 android:inputType="textPassword"
                 android:hint="@string/sign_in_password_hint"/>
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edittexthieghtsignup"
+                android:id="@+id/signip_type_spinner"
+                style="@android:style/Widget.Spinner.DropDown"
+                 android:layout_marginBottom="@dimen/itempadding"
+                >
+
+            </Spinner>
             <Button
                 android:id="@+id/sign_in_button"
                 android:layout_width="match_parent"

@@ -47,6 +47,7 @@ public class EditProfileFragement extends Fragment {
     CheckBox male;
     CheckBox female;
     Button changeGenderButton;
+    public static String userType;
 
     public EditProfileFragement() {
         // Required empty public constructor

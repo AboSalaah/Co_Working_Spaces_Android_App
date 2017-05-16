@@ -1,20 +1,13 @@
-package com.example.ahmedsaleh.dbse_schools.Fragments;
-
+package com.example.ahmedsaleh.dbse_schools.Activities;
 
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.example.ahmedsaleh.dbse_schools.Activities.Co_Working_Spaces;
-import com.example.ahmedsaleh.dbse_schools.Activities.SignIn;
 import com.example.ahmedsaleh.dbse_schools.Adapters.Governorates_Adapter;
 import com.example.ahmedsaleh.dbse_schools.R;
 
@@ -30,57 +23,37 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Response;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
-public class HomeFragement extends Fragment {
+public class TempGovernorates extends AppCompatActivity {
 
     private StringBuilder Url=new StringBuilder();
     private String result;
     private Governorates_Adapter governoratesAdapter;
-    public static String userType;
-    public HomeFragement() {
-        // Required empty public constructor
-    }
-
+    public  static String type;
+    public static String state;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home_fragement, container, false);
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        getActivity().setTitle("Home");
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        ListView listView=(ListView)getActivity().findViewById(R.id.list_view);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_temp_governorates);
+        ListView listView=(ListView)findViewById(R.id.list_view);
         ArrayList<String> arr=new ArrayList<>();
-        arr.add("cairo");
-        arr.add("giza");
-        governoratesAdapter=new Governorates_Adapter(getContext(),new ArrayList<String>(arr));
+        Intent intent = getIntent();
+        final String realname=intent.getStringExtra("realname");
+        governoratesAdapter =new Governorates_Adapter(this,new ArrayList<String>());
         listView.setAdapter(governoratesAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String Governorate =(String) parent.getItemAtPosition(position);
-                Intent intent=new Intent(getContext(),Co_Working_Spaces.class);
+                Intent intent=new Intent(TempGovernorates.this,Temp_Co_Working_Spaces.class);
                 intent.putExtra("name",Governorate);
+                intent.putExtra("realname",realname);
                 startActivity(intent);
 
             }
         });
 
         Url.append(getString(R.string.url)+"schoollocation"+"?token="+ SignIn.token);
-        //connect();
-
-
+        connect();
 
 
     }
@@ -96,19 +69,12 @@ public class HomeFragement extends Fragment {
             @Override
             public void onFailure(Call call, IOException e) {
 
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(getActivity(),"Connection Failed!", Toast.LENGTH_LONG).show();
-                    }
-                });
-
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 result=response.body().string().toString();
-                getActivity().runOnUiThread(new Runnable() {
+                runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         try {
@@ -145,6 +111,4 @@ public class HomeFragement extends Fragment {
         });
 
     }
-
-
 }

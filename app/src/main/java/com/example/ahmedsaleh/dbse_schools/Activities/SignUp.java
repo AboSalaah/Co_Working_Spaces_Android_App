@@ -7,9 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.ahmedsaleh.dbse_schools.R;
@@ -30,68 +34,48 @@ import okhttp3.Response;
 
 public class SignUp extends AppCompatActivity {
 
-    EditText username;
-    EditText email;
-    EditText password;
-    EditText realname;
-    Button createaccount;
-    Button nextbutton;
-    Button change;
-    EditText confirmCodeEditText;
-    CheckBox male;
-    CheckBox female;
-    Map<String, String> params;
-    String confirmCode;
-
-    String result=null;
-    StringBuilder URL;
-
+    private RadioGroup genderRadioGroup;
+    private String Gender;
+    private ArrayAdapter<CharSequence> types; //array adapter to hold the types data for spinner
+    private Spinner TypesSpinner;
+    private String userType;//string for type of the user
+    private EditText username;
+    private EditText email;
+    private EditText password;
+    private EditText phonenumber;
+    private EditText realname;
+    private Button firstNextButton;
+    private Button secondNextButton;
+    private Map<String, String> params;
+    private EditText confirmCodeEditText;
+    private String confirmCode;
+    private String result=null;
+    private StringBuilder URL;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-
         URL = new StringBuilder(getString(R.string.url)+"signupverify");
-        username =(EditText)findViewById(R.id.usernameedittext);
-        email =(EditText)findViewById(R.id.emailedittext);
-        password =(EditText)findViewById(R.id.passwordedittext);
-        realname =(EditText)findViewById(R.id.real_user_name_editText);
-        createaccount =(Button) findViewById(R.id.createaccount_button);
-        nextbutton =(Button) findViewById(R.id.next_step);
-        change = (Button) findViewById(R.id.chooseGender);
-        male = (CheckBox) findViewById(R.id.male_checkbox);
-        female = (CheckBox) findViewById(R.id.female_checkbox);
-        male.toggle();
-        params = new HashMap<String, String>();
-        change.setOnClickListener(new View.OnClickListener() {
+        genderRadioGroup=(RadioGroup)findViewById(R.id.signup_radio_group);
+        realname=(EditText)findViewById(R.id.signup_realname);
+        phonenumber=(EditText)findViewById(R.id.singup_phone_number);
+        firstNextButton=(Button)findViewById(R.id.signup_first_next_button);
+        secondNextButton=(Button)findViewById(R.id.signup_second_next_button);
+       // genderRadioGroup.setVisibility(View.GONE);
+       // realname.setVisibility(View.GONE);
+       // phonenumber.setVisibility(View.GONE);
+       // secondNextButton.setVisibility(View.GONE);
+        genderRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onClick(View view) {
-                male.toggle();
-                female.toggle();
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                View radioButton = genderRadioGroup.findViewById(checkedId);
+                int index = genderRadioGroup.indexOfChild(radioButton);
+                if(index==0)Gender="MALE";
+                else Gender="FEMALE";
             }
         });
 
-        createaccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(validateOtherData()){
-                    URL = new StringBuilder(getString(R.string.url)+"signup");
-                    params = new HashMap<String, String>();
-                    params.put("username",username.getText().toString());
-                    params.put("email",email.getText().toString());
-                    params.put("password",password.getText().toString());
-                    if(male.isChecked()){
-                        params.put("gender","MALE");
-                    }else{
-                        params.put("gender","FEMALE");
-                    }
-                    params.put("name",realname.getText().toString());
-                    params.put("type","VISITOR");
-                    //connectToPost();
-                }
-            }
-        });
-        nextbutton.setOnClickListener(new View.OnClickListener() {
+        firstNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(validate()){
@@ -99,13 +83,71 @@ public class SignUp extends AppCompatActivity {
                     params.put("username",username.getText().toString());
                     params.put("email",email.getText().toString());
                     params.put("password",password.getText().toString());
-                    //connectToPostVerify();
+                    params.put("type",userType);
+                    connectToPostVerify();
+                    verifyemail();
                 }
             }
         });
 
+
+
+        secondNextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(validateOtherData()){
+
+                    if(!userType.equals(getString(R.string.wso))&&!userType.equals(getString(R.string.pwso)))
+                    { URL = new StringBuilder(getString(R.string.url)+"signup");
+                        params = new HashMap<String, String>();
+                        params.put("username",username.getText().toString());
+                        params.put("email",email.getText().toString());
+                        params.put("password",password.getText().toString());
+                        params.put("gender",Gender);
+                        params.put("name",realname.getText().toString());
+                        params.put("type","VISITOR");
+                        connectToPost();
+                    }
+                    else
+                    {
+                        moveToGovernoratesActivity();
+                    }
+                }
+            }
+        });
+
+
+
+        TypesSpinner=(Spinner)findViewById(R.id.signup_type_spinner);
+        types=ArrayAdapter.createFromResource(this,R.array.types,android.R.layout.simple_spinner_item);
+        types.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        TypesSpinner.setAdapter(types);
+        TypesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String item=(String)parent.getItemAtPosition(position);
+                if(item.equals(getString(R.string.visitor_spinner))){
+                    userType=getString(R.string.visitor);
+                }
+                else if(item.equals(getString(R.string.wso_spinner))){
+                    userType=getString(R.string.wso);
+
+                }
+                else if(item.equals(getString(R.string.pwso_spinner))){
+                    userType=getString(R.string.pwso);
+                }
+                else {userType="";}
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
     }
-    //  this function for validating the user input for regiseration
+
+
     boolean validate()
     {
         if(username.getText().toString().isEmpty())
@@ -121,6 +163,11 @@ public class SignUp extends AppCompatActivity {
         if(password.getText().toString().isEmpty())
         {
             password.setError("password "+getString(R.string.emptyerror));
+            return false;
+        }
+        if(userType.isEmpty())
+        {
+            Toast.makeText(getApplicationContext(),getString(R.string.notypeerror),Toast.LENGTH_LONG).show();
             return false;
         }
         return true;
@@ -139,15 +186,17 @@ public class SignUp extends AppCompatActivity {
                 confirmCodeEditText = (EditText) mview.findViewById(R.id.confirmation_code_editText);
                 String mystr = confirmCodeEditText.getText().toString();
                 if(mystr.equals(confirmCode)) {
-                    nextbutton.setVisibility(View.INVISIBLE);
-                    createaccount.setVisibility(View.VISIBLE);
                     realname.setVisibility(View.VISIBLE);
-                    male.setVisibility(View.VISIBLE);
-                    female.setVisibility(View.VISIBLE);
-                    change.setVisibility(View.VISIBLE);
+                    if(userType.equals(getString(R.string.pwso))||userType.equals(getString(R.string.wso))){phonenumber.setVisibility(View.VISIBLE);}
+                    genderRadioGroup.setVisibility(View.VISIBLE);
+                    secondNextButton.setVisibility(View.VISIBLE);
+                    secondNextButton.setText(getString(R.string.yourworkspace));
+
                 } else {
+
                     Toast.makeText(SignUp.this, "Wrong Code", Toast.LENGTH_LONG).show();
                 }
+                dialog.dismiss();
             }
         });
         mBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -160,18 +209,28 @@ public class SignUp extends AppCompatActivity {
         dialog.show();
     }
 
-    private void moveToSignInActivity(){
-        Intent i = new Intent(SignUp.this,SignIn.class);
-        startActivity(i);
-    }
-
     boolean validateOtherData(){
         if(realname.getText().toString().isEmpty()){
             realname.setError("User Name "+(getString(R.string.emptyerror)));
             return false;
         }
+        if(userType.equals(getString(R.string.pwso))||userType.equals(getString(R.string.wso)))
+        {
+            if(phonenumber.getText().toString().isEmpty())
+            {
+                phonenumber.setError("Phone Number "+(getString(R.string.emptyerror)));
+                return false;
+            }
+        }
+        if (genderRadioGroup.getCheckedRadioButtonId() == -1)
+        {
+            Toast.makeText(getApplicationContext(),getString(R.string.nogendererror),Toast.LENGTH_LONG).show();
+            return false;
+        }
+
         return true;
     }
+
 
     void connectToPostVerify() {
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
@@ -185,6 +244,8 @@ public class SignUp extends AppCompatActivity {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(okhttp3.Call call, IOException e) {
+                Log.v("responsehhhhhhhhh", call.request().body().toString());
+                e.printStackTrace();
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -197,10 +258,10 @@ public class SignUp extends AppCompatActivity {
             public void onResponse(okhttp3.Call call, final Response response) throws IOException {
                 result = response.body().string().toString();
                 Log.v("Response code", String.valueOf(response.code()));
-                Log.i("tag","resulltttttt "+result);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+
                         try {
                             JSONObject json = new JSONObject(result);
                             confirmCode = json.get("code").toString();
@@ -219,6 +280,15 @@ public class SignUp extends AppCompatActivity {
         });
     }
 
+    private void moveToSignInActivity(){
+        Intent i = new Intent(SignUp.this,SignIn.class);
+        startActivity(i);
+    }
+    private void moveToGovernoratesActivity(){
+        Intent i = new Intent(SignUp.this,TempGovernorates.class);
+        i.putExtra("realname",realname.getText().toString());
+        startActivity(i);
+    }
     void connectToPost() {
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         JSONObject parameter = new JSONObject(params);
@@ -231,12 +301,15 @@ public class SignUp extends AppCompatActivity {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(okhttp3.Call call, IOException e) {
+                Log.v("responsehhhhhhhhh", call.request().body().toString());
+                e.printStackTrace();
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         Toast.makeText(SignUp.this,"Connection Failed!", Toast.LENGTH_LONG).show();
                     }
                 });
+
             }
 
             @Override
@@ -246,11 +319,14 @@ public class SignUp extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+
                         try {
                             JSONObject json = new JSONObject(result);
                             String msg = json.get("msg").toString();
                             Toast.makeText(SignUp.this, msg, Toast.LENGTH_LONG).show();
+                            //
                             moveToSignInActivity();
+                            //here the code to make the wso or pwso select thier workspace
                             finish();
                         } catch (JSONException e) {
                             Toast.makeText(SignUp.this, "Registeration Failed!", Toast.LENGTH_LONG).show();
@@ -263,4 +339,6 @@ public class SignUp extends AppCompatActivity {
             }
         });
     }
+
+
 }

@@ -19,6 +19,7 @@
     <string name="locationonmap">Location On Map</string>
     <string name="others">Others</string>
     <string name="submitrating">Rate This Place!</string>
+    <string name="events">Events</string>
     <string name="token">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL2xvY2FsaG9zdFwvZGJzZVwvcHVibGljXC9hcGlcL3YxXC9zaWduaW4iLCJpYXQiOjE0OTI5ODI2MjQsImV4cCI6MTQ5Mjk4NjIyNCwibmJmIjoxNDkyOTgyNjI0LCJqdGkiOiJ5WnhZOExLbmJwY0tuWFNwIn0.SnAnlH8Djk2abGAe2nqmvfrwYDgr0zOA8Bja0uYu5dc</string>
     <string name="imageurl">http://e7f5836e.ngrok.io/dbse/public/</string>
     <string name="your_string_here">
@@ -54,6 +55,8 @@
     <string name="submit">Submit</string>
     <string name="cancel">Cancel</string>
     <string name="change">change</string>
+    <string name="notypeerror">You Must Select A Type</string>
+    <string name="nogendererror">You Must Select Your Gender</string>
 
     <!--these strings for Sign in activity-->
     <string name="sign_in_email_hint">E-mail</string>
@@ -62,15 +65,55 @@
     <string name="sign_up">Sign Up</string>
     <string name="froget_pass">Forgotten Password?</string>
     <string name="remember_me">Remember Me</string>
-    <string name="sign_in_title">Private Schools</string>
+    <string name="sign_in_title">CoWorking Spaces</string>
     <string name="contacts_text">Contancts</string>
     <string name="facebook">Facebook Page</string>
     <string name="forget_pass_title1">We will send a new password</string>
     <string name="emailORusername">UserName or e-mail</string>
     <string name="statelabel">State</string>
     <string name="typelabel">Type</string>
+    <string name="genderlabel">Gender</string>
 
     <string name="url">http://6588b843.ngrok.io/dbse/public/api/v1/</string>
+
+
+    <!--string for change the second next button to workspace when type is wso or pwso-->
+    <string name="yourworkspace">Click to Select Your WorkSpace</string>
+
+
+    <!--string for hint in coworking spacecode-->
+    <string name="coworkingspacecodehint">Enter CoWorkingSpace Code</string>
+    <!--string for title of input dialog when user confirm code for working space e-mail-->
+    <string name="confirmworkingspaceemail">WorkingSpace E-mail Code</string>
+    <!--string for hints in singup activity-->
+    <string name="usernamehint">Enter Your UserName</string>
+    <string name="passwordhint">Enter Your Password</string>
+    <string name="emailhint">Enter Your Email</string>
+    <string name="realnamehint">Enter Your Real Name</string>
+    <string name="phonehing">Enter Your Phone Number</string>
+
+    <!--string for next buttons in singup-->
+    <string name="nextbutton">Next</string>
+    <!-- strings for gender radio buttons-->
+    <string name="maleradiobutton">Male</string>
+    <string name="femalerediobutton">Female</string>
+    <string name="male">MALE</string>
+    <string name="female">FEMALE</string>
+
+    <!--strings for type spinner-->
+    <string name="visitor_spinner">Visitor</string>
+    <string name="wso_spinner">WorkSpacOwner</string>
+    <string name="pwso_spinner">PremiumWorkSpaceOwner</string>
+    <string-array name="types">
+        <item></item>
+        <item>@string/visitor_spinner</item>
+        <item>@string/wso_spinner</item>
+        <item>@string/pwso_spinner</item>
+    </string-array>
+    <string name="visitor">VISITOR</string>
+    <string name="wso">WSO</string>
+    <string name="pwso">PWSO</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

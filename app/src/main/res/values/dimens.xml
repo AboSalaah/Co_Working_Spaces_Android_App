@@ -23,7 +23,9 @@
 
     <!-- padding for rating bar-->
     <dimen name="ratingbarpadding">20dp</dimen>
-
+    <!-- padding for type spinner text-->
+    <dimen name="typepadding">20dp</dimen>
+    <dimen name="createyouraccounttextsize">40dp</dimen>
 
 
 </resources>

@@ -26,13 +26,14 @@ import okhttp3.OkHttpClient;
 import okhttp3.Response;
 
 public class Co_Working_Space_Profile extends AppCompatActivity {
-    StringBuilder Url=new StringBuilder();
-    String result;
+    private StringBuilder Url=new StringBuilder();
+    private String result;
     private double lat; //represent latitude for location on map
     private double lon;//represent longitude for loctaion on map
     private String location="Default"; //represent the city for location on map
     private RatingBar ratingBar;
     private double finalRating;
+    public static String userType;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

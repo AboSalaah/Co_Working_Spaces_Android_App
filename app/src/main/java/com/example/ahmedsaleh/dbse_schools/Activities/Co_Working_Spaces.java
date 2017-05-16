@@ -31,6 +31,7 @@ public class Co_Working_Spaces extends AppCompatActivity {
     private String result;
     private Co_Working_Spaces_Adapter coWorkingSpacesAdapter;
     private ListView listView;
+    public static String userType;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

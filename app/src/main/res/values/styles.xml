@@ -80,7 +80,7 @@
 
     <style name="edittext_sign_in_up_style">
         <item name="android:layout_height">@dimen/edittexthieghtsignup</item>
-        <item name="android:layout_width">@dimen/edittextwidthsignup</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:background">@drawable/roundedborder</item>
         <item name="android:layout_marginBottom">20dp</item>
         <item name="android:layout_centerHorizontal">true</item>
@@ -94,5 +94,7 @@
         <item name="android:padding">20dp</item>
 
     </style>
+
+
 
 </resources>
