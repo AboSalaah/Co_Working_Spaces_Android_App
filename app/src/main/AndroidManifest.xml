@@ -30,7 +30,7 @@
             >
 
         </activity>
-        <activity android:name=".Activities.School_Profile"
+        <activity android:name=".Activities.Co_Working_Space_Profile"
             android:label="@string/schoolprofile"
 
             ></activity>

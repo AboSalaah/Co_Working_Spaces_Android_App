@@ -18,6 +18,7 @@
     <string name="fees">Fees</string>
     <string name="locationonmap">Location On Map</string>
     <string name="others">Others</string>
+    <string name="submitrating">Rate This Place!</string>
     <string name="token">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL2xvY2FsaG9zdFwvZGJzZVwvcHVibGljXC9hcGlcL3YxXC9zaWduaW4iLCJpYXQiOjE0OTI5ODI2MjQsImV4cCI6MTQ5Mjk4NjIyNCwibmJmIjoxNDkyOTgyNjI0LCJqdGkiOiJ5WnhZOExLbmJwY0tuWFNwIn0.SnAnlH8Djk2abGAe2nqmvfrwYDgr0zOA8Bja0uYu5dc</string>
     <string name="imageurl">http://e7f5836e.ngrok.io/dbse/public/</string>
     <string name="your_string_here">
@@ -66,7 +67,8 @@
     <string name="facebook">Facebook Page</string>
     <string name="forget_pass_title1">We will send a new password</string>
     <string name="emailORusername">UserName or e-mail</string>
-
+    <string name="statelabel">State</string>
+    <string name="typelabel">Type</string>
 
     <string name="url">http://6588b843.ngrok.io/dbse/public/api/v1/</string>
 

@@ -52,7 +52,7 @@ public class Co_Working_Spaces extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Co_Working_Space coWorkingSpace =(Co_Working_Space)parent.getItemAtPosition(position);
-                Intent intent=new Intent(Co_Working_Spaces.this,School_Profile.class);
+                Intent intent=new Intent(Co_Working_Spaces.this,Co_Working_Space_Profile.class);
                 intent.putExtra("id", coWorkingSpace.getmId());
                 startActivity(intent);
             }
@@ -82,42 +82,46 @@ public class Co_Working_Spaces extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                     result=response.body().string().toString();
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                Log.i("tag","resultttt  "+result);
-                                ArrayList<Co_Working_Space> coWorkingSpaces =new ArrayList<Co_Working_Space>();
-                                JSONArray jsonArray=new JSONArray(result);
-                                for(int i=0;i<jsonArray.length();++i)
+                result=response.body().string().toString();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Log.i("tag","resultttt  "+result);
+                            ArrayList<Co_Working_Space>schools=new ArrayList<Co_Working_Space>();
+                            JSONArray jsonArray=new JSONArray(result);
+                            for(int i=0;i<jsonArray.length();++i)
+                            {
+                                JSONObject jsonObject=jsonArray.getJSONObject(i);
+                                if(jsonObject.has("name")&&!jsonObject.getString("name").equals("null"))
                                 {
-                                    JSONObject jsonObject=jsonArray.getJSONObject(i);
-                                    if(jsonObject.has("name")&&!jsonObject.getString("name").equals("null"))
+                                    String co_working_space_name=jsonObject.getString("name");
+                                    if(jsonObject.has("id"))
                                     {
-                                        String schoolname=jsonObject.getString("name");
-                                        if(jsonObject.has("id"))
+                                        String co_working_space_id=String.valueOf(jsonObject.getInt("id"));
+                                        if(jsonObject.has("logo")&&!jsonObject.getString("logo").equals("null")&&jsonObject.getString("logo").contains("storage"))
                                         {
-                                            String schoolid=String.valueOf(jsonObject.getInt("id"));
-                                            if(jsonObject.has("logo")&&!jsonObject.getString("logo").equals("null")&&jsonObject.getString("logo").contains("storage"))
+                                            String co_working_space_logo=getString(R.string.imageurl)+jsonObject.getString("logo");
+                                            if(jsonObject.has("rate"))
                                             {
-                                                String schoollogo=getString(R.string.imageurl)+jsonObject.getString("logo");
-                                                //coWorkingSpaces.add(new Co_Working_Space(schoolname,schoolid,schoollogo));
-
+                                                double co_working_space_rate=jsonObject.getDouble("rate");
+                                                schools.add(new Co_Working_Space(co_working_space_name,co_working_space_id,co_working_space_logo,(float)co_working_space_rate));
                                             }
                                         }
+
                                     }
                                 }
-                                Log.i("tag","size el araaay "+ coWorkingSpaces.size());
-                                coWorkingSpacesAdapter.clear();
-                                coWorkingSpacesAdapter.addAll(coWorkingSpaces);
-                                coWorkingSpacesAdapter.notifyDataSetChanged();
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
                             }
+                            Log.i("tag","size el araaay "+schools.size());
+                            coWorkingSpacesAdapter.clear();
+                            coWorkingSpacesAdapter.addAll(schools);
+                            coWorkingSpacesAdapter.notifyDataSetChanged();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                    });
+                    }
+                });
 
 
 
@@ -125,6 +129,7 @@ public class Co_Working_Spaces extends AppCompatActivity {
         });
 
     }
+
 
 
 
