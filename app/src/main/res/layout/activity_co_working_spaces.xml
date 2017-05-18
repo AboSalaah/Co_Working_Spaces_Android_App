@@ -12,12 +12,22 @@
     android:background="@color/dbsecolor"
     android:orientation="vertical"
     >
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/search"
+        android:background="@color/buttonsignupcolor"
+        android:layout_marginBottom="@dimen/itempadding"
+        android:id="@+id/search_button"
+        android:textColor="@color/white"
+        />
 
     <ListView
         android:id="@+id/co_working_spaces_list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:dividerHeight="@dimen/spacing_list_view"
+
         >
 
     </ListView>

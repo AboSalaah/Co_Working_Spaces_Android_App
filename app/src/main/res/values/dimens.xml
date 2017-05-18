@@ -28,4 +28,8 @@
     <dimen name="createyouraccounttextsize">40dp</dimen>
 
 
+    <!-- price width in search-->
+    <dimen name="price_width">90dp</dimen>
+
+
 </resources>

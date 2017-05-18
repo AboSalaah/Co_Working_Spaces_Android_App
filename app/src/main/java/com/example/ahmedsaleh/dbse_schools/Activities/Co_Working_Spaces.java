@@ -1,11 +1,14 @@
 package com.example.ahmedsaleh.dbse_schools.Activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -32,6 +35,7 @@ public class Co_Working_Spaces extends AppCompatActivity {
     private Co_Working_Spaces_Adapter coWorkingSpacesAdapter;
     private ListView listView;
     public static String userType;
+    private Button searchButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +43,13 @@ public class Co_Working_Spaces extends AppCompatActivity {
         listView=(ListView)findViewById(R.id.co_working_spaces_list_view);
         final Intent intent=getIntent();
         String govname=intent.getStringExtra("name");
+        searchButton=(Button)findViewById(R.id.search_button);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OpenSearchDialog();
+            }
+        });
         ArrayList<Co_Working_Space>arr=new ArrayList<>();
         arr.add(new Co_Working_Space("creativo","1",3));
         arr.add(new Co_Working_Space("creativo","1",2));
@@ -130,6 +141,54 @@ public class Co_Working_Spaces extends AppCompatActivity {
         });
 
     }
+
+
+    void OpenSearchDialog()
+    {
+        final AlertDialog.Builder mBuilder=new AlertDialog.Builder(Co_Working_Spaces.this,android.R.style.Theme_DeviceDefault_Light_Dialog_Alert);
+        final View mview=getLayoutInflater().inflate(R.layout.search_dialog,null);
+        mBuilder.setTitle(R.string.search);
+
+
+       /* EditText co_working_space_name=(EditText)getActivity().findViewById(R.id.co_working_space_search_name);
+        EditText co_working_space_city=(EditText)getActivity().findViewById(R.id.co_working_space_search_city);
+        EditText co_working_space_price_from=(EditText)getActivity().findViewById(R.id.co_working_space_search_price_from);
+        EditText co_working_space_price_to=(EditText)getActivity().findViewById(R.id.co_working_space_search_price_to);
+        CheckBox air_condition=(CheckBox)getActivity().findViewById(R.id.air_condition_check_box);
+        CheckBox privaterooms=(CheckBox)getActivity().findViewById(R.id.private_rooms_check_box);
+        CheckBox printing_3d=(CheckBox)getActivity().findViewById(R.id.printing_3d_check_box);
+        CheckBox pcb_printing=(CheckBox)getActivity().findViewById(R.id.pcb_printing_check_box);
+        CheckBox smoking_area=(CheckBox)getActivity().findViewById(R.id.smoking_area_check_box);
+        CheckBox girls_area=(CheckBox)getActivity().findViewById(R.id.girls_area_check_box);
+        CheckBox cyber=(CheckBox)getActivity().findViewById(R.id.cyber_check_box);
+        CheckBox data_show=(CheckBox)getActivity().findViewById(R.id.data_show_check_box);
+        CheckBox laser_cutter=(CheckBox)getActivity().findViewById(R.id.laser_cutter_check_box);
+        CheckBox cafeteria=(CheckBox)getActivity().findViewById(R.id.cafeteria_checkbox);
+        CheckBox wifi=(CheckBox)getActivity().findViewById(R.id.wifi_check_box);
+        */
+
+        mBuilder.setPositiveButton(R.string.submit, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                // User clicked OK butt
+                //here i should prepare the url with the search parameters
+               Toast.makeText(Co_Working_Spaces.this,"OK",Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
+        mBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User cancelled the dialog
+                Toast.makeText(Co_Working_Spaces.this,"Cancel",Toast.LENGTH_SHORT).show();
+            }
+        });
+        mBuilder.setView(mview);
+        AlertDialog dialog=mBuilder.create();
+        dialog.show();
+    }
+
 
 
 

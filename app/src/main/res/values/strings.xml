@@ -113,6 +113,29 @@
     <string name="visitor">VISITOR</string>
     <string name="wso">WSO</string>
     <string name="pwso">PWSO</string>
+    <!--string for search button-->
+    <string name="search">Search</string>
+
+    <!-- strings for search labels and texts-->
+    <string name="namelabel">Name</string>
+    <string name="price">Price</string>
+    <string name="lower_bound">From</string>
+    <string name="upper_bound">To</string>
+    <string name="air_condition">Air Condition</string>
+    <string name="private_rooms">Private Rooms</string>
+    <string name="data_show">Data Show</string>
+    <string name="wifi">Wifi</string>
+    <string name="laser_cutter">Laser Cutter</string>
+    <string name="printing_3d">3D Printing</string>
+    <string name="pcb_printing">PCB Printing</string>
+    <string name="girls_area">Girls Area</string>
+    <string name="smoking_area">Smoking Area</string>
+    <string name="cafeteria">Cafeteria</string>
+    <string name="cyber">Cyber</string>
+    <string name="preferences">Preferences</string>
+
+
+
 
 
     <!-- TODO: Remove or change this placeholder text -->

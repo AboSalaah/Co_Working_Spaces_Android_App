@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -94,6 +94,24 @@
         <item name="android:padding">20dp</item>
 
     </style>
+
+    <!--style for items in search dialog-->
+    <style name="searchdialogitems">
+        <item name="android:padding">@dimen/itempadding</item>
+        <item name="android:layout_marginBottom">@dimen/itempadding</item>
+        <item name="android:textSize">17sp</item>
+
+    </style>
+    <style name="searchdialogitemslabels">
+        <item name="android:padding">@dimen/itempadding</item>
+        <item name="android:layout_marginBottom">@dimen/itempadding</item>
+        <item name="android:layout_marginLeft">@dimen/itempadding</item>
+        <item name="android:layout_marginRight">@dimen/itempadding</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:backgroundTint" tools:targetApi="lollipop"> @color/white</item>
+
+    </style>
+
 
 
 
