@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.example.ahmedsaleh.dbse_schools.Helpers.QueryUtils;
 import com.example.ahmedsaleh.dbse_schools.R;
@@ -44,10 +45,15 @@ public class Co_Working_Space_Profile extends YouTubeBaseActivity {
     private String location="Default"; //represent the city for location on map
     private RatingBar ratingBar;
     private double finalRating;
+
+    private Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_co_working_space_profile);
+       // Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
+       // setSupportActionBar(toolbar);
+
         final Intent intent=getIntent();
         String co_working_spaceid=intent.getStringExtra("id");
         TextView locationonmaplabel=(TextView)findViewById(R.id.co_working_space_profile_location_on_map_label);
@@ -80,6 +86,7 @@ public class Co_Working_Space_Profile extends YouTubeBaseActivity {
 
         Url.append(getString(R.string.url)+"co_working_space/"+co_working_spaceid+"?token="+SignIn.token);
         // connect();
+
         youTubePlayerView = (YouTubePlayerView) findViewById(R.id.youtube_player);
         onInitializedListener = new YouTubePlayer.OnInitializedListener(){
             @Override

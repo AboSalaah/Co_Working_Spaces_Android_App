@@ -31,7 +31,7 @@
             android:label="@string/listofschoolsactivityname" />
         <activity
             android:name=".Activities.Co_Working_Space_Profile"
-            android:label="CoWorking Spaces" />
+            android:label="CoWorking Spaces"/>
         <activity android:name=".Activities.TempGovernorates" />
         <activity android:name=".Activities.Temp_Co_Working_Spaces" />
         <activity android:name=".Activities.Edit_CoWorkingSpace"></activity>

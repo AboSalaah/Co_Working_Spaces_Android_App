@@ -116,11 +116,78 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Others"/>
-        <EditText
-            android:id="@+id/Workspace_others_editText"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            />
+            android:orientation="vertical"
+            >
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/air_condition"
+                android:id="@+id/air_condition_check_box_editprofile"
+                />
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/private_rooms"
+                android:id="@+id/private_rooms_check_box_editprofile"
+                />
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/data_show"
+                android:id="@+id/data_show_check_box_editprofile"
+                />
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/wifi"
+                android:id="@+id/wifi_check_box_editprofile"
+                />
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/laser_cutter"
+                android:id="@+id/laser_cutter_check_box_editprofile"
+                />
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/printing_3d"
+                android:id="@+id/printing_3d_check_box_editprofile"
+                />
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pcb_printing"
+                android:id="@+id/pcb_printing_check_box_editprofile"
+                />
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/girls_area"
+                android:id="@+id/girls_area_check_box_editprofile"
+                />
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/smoking_area"
+                android:id="@+id/smoking_area_check_box_editprofile"
+                />
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cafeteria"
+                android:id="@+id/cafeteria_checkbox_editprofile"
+                />
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cyber"
+                android:id="@+id/cyber_check_box_editprofile"
+                />
 
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>
