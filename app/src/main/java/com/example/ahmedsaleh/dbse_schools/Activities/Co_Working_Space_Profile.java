@@ -1,6 +1,7 @@
 package com.example.ahmedsaleh.dbse_schools.Activities;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,12 +35,25 @@ public class Co_Working_Space_Profile extends AppCompatActivity {
     private RatingBar ratingBar;
     private double finalRating;
     public static String userType;
+    FloatingActionButton editWorkSpace;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_co_working_space_profile);
         final Intent intent=getIntent();
         String co_working_spaceid=intent.getStringExtra("id");
+        editWorkSpace=(FloatingActionButton)findViewById(R.id.fab);
+        if(userType.equals(getString(R.string.wso))||userType.equals(getString(R.string.pwso)))
+        {
+            editWorkSpace.setVisibility(View.GONE);
+        }
+        editWorkSpace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              //  Intent i = new Intent(Co_Working_Space_Profile.this,SignIn.class);
+               // startActivity(i);
+            }
+        });
         TextView locationonmaplabel=(TextView)findViewById(R.id.co_working_space_profile_location_on_map_label);
         TextView locationonmap=(TextView)findViewById(R.id.co_working_space_profile_location_on_map);
         locationonmaplabel.setText(R.string.locationonmap);
@@ -58,15 +72,7 @@ public class Co_Working_Space_Profile extends AppCompatActivity {
                 finalRating=rating;
             }
         });
-        Button ratingbutton=(Button)findViewById(R.id.rating_submit_button);
-        ratingbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Co_Working_Space_Profile.this,"finaaalrating :"+finalRating,Toast.LENGTH_SHORT).show();
-                TextView textView=(TextView)findViewById(R.id.co_working_space_profile_rate);
-                textView.setText(String.valueOf(finalRating));
-            }
-        });
+
 
         Url.append(getString(R.string.url)+"co_working_space/"+co_working_spaceid+"?token="+SignIn.token);
         // connect();

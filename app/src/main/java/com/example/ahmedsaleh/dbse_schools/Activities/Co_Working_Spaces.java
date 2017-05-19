@@ -147,7 +147,7 @@ public class Co_Working_Spaces extends AppCompatActivity {
     {
         final AlertDialog.Builder mBuilder=new AlertDialog.Builder(Co_Working_Spaces.this,android.R.style.Theme_DeviceDefault_Light_Dialog_Alert);
         final View mview=getLayoutInflater().inflate(R.layout.search_dialog,null);
-        mBuilder.setTitle(R.string.search);
+        //mBuilder.setTitle(R.string.search);
 
 
        /* EditText co_working_space_name=(EditText)getActivity().findViewById(R.id.co_working_space_search_name);

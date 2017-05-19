@@ -80,10 +80,15 @@ public class SignUp extends AppCompatActivity {
             public void onClick(View view) {
                 if(validate()){
                     params = new HashMap<String, String>();
-                    params.put("username",username.getText().toString());
-                    params.put("email",email.getText().toString());
-                    params.put("password",password.getText().toString());
-                    params.put("type",userType);
+                    String userName=username.getText().toString();
+                    String Email=email.getText().toString();
+                    String Password=password.getText().toString();
+                    params.put("username",userName);
+                    params.put("email",Email);
+                    params.put("password",Password);
+                    Temp_Co_Working_Spaces.username=userName;
+                    Temp_Co_Working_Spaces.email=Email;
+                    Temp_Co_Working_Spaces.password=Password;
                     connectToPostVerify();
                     verifyemail();
                 }
@@ -96,7 +101,18 @@ public class SignUp extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(validateOtherData()){
-
+                    String userName=username.getText().toString();
+                    String Email=email.getText().toString();
+                    String Password=password.getText().toString();
+                    String realName=realname.getText().toString();
+                    String phoneNumber=phonenumber.getText().toString();
+                    Temp_Co_Working_Spaces.username=userName;
+                    Temp_Co_Working_Spaces.email=Email;
+                    Temp_Co_Working_Spaces.password=Password;
+                    Temp_Co_Working_Spaces.realName=realName;
+                    Temp_Co_Working_Spaces.gender=Gender;
+                    Temp_Co_Working_Spaces.userType=userType;
+                    Temp_Co_Working_Spaces.phoneNumber=phoneNumber;
                     if(!userType.equals(getString(R.string.wso))&&!userType.equals(getString(R.string.pwso)))
                     { URL = new StringBuilder(getString(R.string.url)+"signup");
                         params = new HashMap<String, String>();
@@ -182,7 +198,7 @@ public class SignUp extends AppCompatActivity {
 
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                // User clicked OK butt
+                // User clicked OK button
                 confirmCodeEditText = (EditText) mview.findViewById(R.id.confirmation_code_editText);
                 String mystr = confirmCodeEditText.getText().toString();
                 if(mystr.equals(confirmCode)) {
@@ -286,7 +302,7 @@ public class SignUp extends AppCompatActivity {
     }
     private void moveToGovernoratesActivity(){
         Intent i = new Intent(SignUp.this,TempGovernorates.class);
-        i.putExtra("realname",realname.getText().toString());
+        //i.putExtra("realname",realname.getText().toString());
         startActivity(i);
     }
     void connectToPost() {
@@ -326,7 +342,7 @@ public class SignUp extends AppCompatActivity {
                             Toast.makeText(SignUp.this, msg, Toast.LENGTH_LONG).show();
                             //
                             moveToSignInActivity();
-                            //here the code to make the wso or pwso select thier workspace
+
                             finish();
                         } catch (JSONException e) {
                             Toast.makeText(SignUp.this, "Registeration Failed!", Toast.LENGTH_LONG).show();

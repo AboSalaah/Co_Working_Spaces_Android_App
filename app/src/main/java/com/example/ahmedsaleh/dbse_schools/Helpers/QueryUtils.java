@@ -1,6 +1,7 @@
 package com.example.ahmedsaleh.dbse_schools.Helpers;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -8,10 +9,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
+import com.example.ahmedsaleh.dbse_schools.Activities.Co_Working_Spaces;
 import com.example.ahmedsaleh.dbse_schools.R;
 
 import java.io.InputStream;
@@ -111,4 +115,7 @@ public class QueryUtils {
         else if(rating>4&&rating<=5)return R.color.fifthdegreeratingbar;
         return R.color.fifthdegreeratingbar;
     }
+
+
+
 }

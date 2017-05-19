@@ -28,16 +28,15 @@ public class TempGovernorates extends AppCompatActivity {
     private StringBuilder Url=new StringBuilder();
     private String result;
     private Governorates_Adapter governoratesAdapter;
-    public  static String type;
-    public static String state;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_temp_governorates);
         ListView listView=(ListView)findViewById(R.id.list_view);
         ArrayList<String> arr=new ArrayList<>();
-        Intent intent = getIntent();
-        final String realname=intent.getStringExtra("realname");
+       // Intent intent = getIntent();
+       // final String realname=intent.getStringExtra("realname");
         governoratesAdapter =new Governorates_Adapter(this,new ArrayList<String>());
         listView.setAdapter(governoratesAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -46,7 +45,7 @@ public class TempGovernorates extends AppCompatActivity {
                 String Governorate =(String) parent.getItemAtPosition(position);
                 Intent intent=new Intent(TempGovernorates.this,Temp_Co_Working_Spaces.class);
                 intent.putExtra("name",Governorate);
-                intent.putExtra("realname",realname);
+               // intent.putExtra("realname",realname);
                 startActivity(intent);
 
             }
