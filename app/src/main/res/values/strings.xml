@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DbSE_Schools</string>
+    <string name="app_name">DbSE_CoWorkingSpaces</string>
     <string name="DbSE">DbSE</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -133,9 +133,6 @@
     <string name="cafeteria">Cafeteria</string>
     <string name="cyber">Cyber</string>
     <string name="preferences">Preferences</string>
-
-
-
 
 
     <!-- TODO: Remove or change this placeholder text -->

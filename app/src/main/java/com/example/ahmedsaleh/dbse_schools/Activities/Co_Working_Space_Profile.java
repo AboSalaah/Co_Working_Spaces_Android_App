@@ -1,9 +1,10 @@
 package com.example.ahmedsaleh.dbse_schools.Activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -13,6 +14,10 @@ import android.widget.Toast;
 
 import com.example.ahmedsaleh.dbse_schools.Helpers.QueryUtils;
 import com.example.ahmedsaleh.dbse_schools.R;
+import com.google.android.youtube.player.YouTubeBaseActivity;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerView;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -25,7 +30,13 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Response;
 
-public class Co_Working_Space_Profile extends AppCompatActivity {
+public class Co_Working_Space_Profile extends YouTubeBaseActivity {
+
+    public static final  String API_KEY = "AIzaSyDbCYaUUsJ9vzuhGhCQUt_LMgEz1Qf9z1U";
+    public static final String Video_ID = "KD1-CTce4e8";
+    YouTubePlayerView youTubePlayerView;
+    private YouTubePlayer.OnInitializedListener onInitializedListener;
+
     private StringBuilder Url=new StringBuilder();
     private String result;
     private double lat; //represent latitude for location on map
@@ -33,7 +44,6 @@ public class Co_Working_Space_Profile extends AppCompatActivity {
     private String location="Default"; //represent the city for location on map
     private RatingBar ratingBar;
     private double finalRating;
-    public static String userType;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,8 +80,47 @@ public class Co_Working_Space_Profile extends AppCompatActivity {
 
         Url.append(getString(R.string.url)+"co_working_space/"+co_working_spaceid+"?token="+SignIn.token);
         // connect();
+        youTubePlayerView = (YouTubePlayerView) findViewById(R.id.youtube_player);
+        onInitializedListener = new YouTubePlayer.OnInitializedListener(){
+            @Override
+            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+                youTubePlayer.loadVideo(Video_ID);
+            }
+
+            @Override
+            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+
+            }
+        };
+        youTubePlayerView.initialize(API_KEY,onInitializedListener);
 
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.edit_coworkspace, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.edit_workspace) {
+            movToEditWorkSpaceActivity();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    private void movToEditWorkSpaceActivity() {
+        Intent i = new Intent(this,Edit_CoWorkingSpace.class);
+        startActivity(i);
     }
 
     private void connect()

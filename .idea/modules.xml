@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/DbSE_Co_Working_Spaces.iml" filepath="$PROJECT_DIR$/DbSE_Co_Working_Spaces.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DbSE_Co_Working_Spaces.iml" filepath="$PROJECT_DIR$/DbSE_Co_Working_Spaces.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

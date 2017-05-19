@@ -47,6 +47,7 @@ public class SignIn extends AppCompatActivity {
     StringBuilder URL;
     public static String token;
     public static int id;
+    public static String type;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -260,6 +261,10 @@ public class SignIn extends AppCompatActivity {
                                         .putString("id", json.getString("id")).commit();
                                 id = Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
                                         .getString("id", "defaultStringIfNothingFound"));
+                                PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit()
+                                        .putString("type", json.getString("type")).commit();
+                                type = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+                                        .getString("type", "defaultStringIfNothingFound");
                                 moveToMainActivity();
                             } catch (JSONException ex){
                                 ex.printStackTrace();
