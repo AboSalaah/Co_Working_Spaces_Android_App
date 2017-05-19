@@ -53,7 +53,6 @@
     <string name="hint_real_name">Real Name</string>
     <string name="emptyerror">Should not be blank</string>
     <string name="confirmationcode">Confirmation Code</string>
-    <string name="confirmationworkspacecode">Confirmation WorkSpace Code</string>
     <string name="submit">Submit</string>
     <string name="cancel">Cancel</string>
     <string name="change">change</string>
