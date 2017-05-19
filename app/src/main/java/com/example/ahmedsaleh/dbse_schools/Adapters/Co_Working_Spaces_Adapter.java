@@ -52,7 +52,11 @@ public class Co_Working_Spaces_Adapter extends ArrayAdapter<Co_Working_Space>{
         if(s.gethas())
         {
             ImageView schoollogo=(ImageView)convertView.findViewById(R.id.co_working_space_logo_image_view);
-            Picasso.with(ctx).load(s.getMimageUrl()).into(schoollogo);}
+
+            Picasso.with(ctx).load(s.getMimageUrl()).into(schoollogo);
+
+
+        }
         RatingBar ratingBar=(RatingBar)convertView.findViewById(R.id.list_view_rating_bar);
         float rating=s.getRating();
         ratingBar.setRating(rating);

@@ -77,8 +77,8 @@ public class HomeFragement extends Fragment {
             }
         });
 
-        Url.append(getString(R.string.url)+"schoollocation"+"?token="+ SignIn.token);
-        //connect();
+        Url.append(getString(R.string.url)+"workspaceslist"+"?token="+ getString(R.string.token));
+        connect();
 
 
 
@@ -119,10 +119,10 @@ public class HomeFragement extends Fragment {
                             for(int i=0;i<jsonArray.length();++i)
                             {
                                 JSONObject jsonObject=jsonArray.getJSONObject(i);
-                                if(jsonObject.has("city")&&!jsonObject.getString("city").equals("null"))
+                                if(jsonObject.has("state")&&!jsonObject.getString("state").equals("null"))
                                 {
 
-                                    String name=jsonObject.getString("city");
+                                    String name=jsonObject.getString("state");
                                     data.add(name);
 
 

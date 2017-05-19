@@ -113,6 +113,16 @@
     </style>
 
 
+    <!-- style for textviews in event profile-->
+    <style name="event_profile_text_view">
+
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_marginTop">@dimen/textview_event_profile</item>
+        <item name="android:layout_marginRight">@dimen/itempadding</item>
+    </style>
+
 
 
 </resources>

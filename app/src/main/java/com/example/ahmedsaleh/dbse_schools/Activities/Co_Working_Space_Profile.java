@@ -12,6 +12,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ahmedsaleh.dbse_schools.Helpers.Co_Working_Space;
 import com.example.ahmedsaleh.dbse_schools.Helpers.QueryUtils;
 import com.example.ahmedsaleh.dbse_schools.R;
 import com.squareup.picasso.Picasso;
@@ -34,15 +35,26 @@ public class Co_Working_Space_Profile extends AppCompatActivity {
     private String location="Default"; //represent the city for location on map
     private RatingBar ratingBar;
     private double finalRating;
-    public static String userType;
+    public static String userType="def";
     FloatingActionButton editWorkSpace;
+    private Button co_working_space_events_button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_co_working_space_profile);
         final Intent intent=getIntent();
-        String co_working_spaceid=intent.getStringExtra("id");
+        final String co_working_spaceid=intent.getStringExtra("id");
         editWorkSpace=(FloatingActionButton)findViewById(R.id.fab);
+        co_working_space_events_button=(Button)findViewById(R.id.co_working_space_profile_events_button);
+        co_working_space_events_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent=new Intent(Co_Working_Space_Profile.this,Events.class);
+                intent.putExtra("id", co_working_spaceid);
+                startActivity(intent);
+            }
+        });
         if(userType.equals(getString(R.string.wso))||userType.equals(getString(R.string.pwso)))
         {
             editWorkSpace.setVisibility(View.GONE);

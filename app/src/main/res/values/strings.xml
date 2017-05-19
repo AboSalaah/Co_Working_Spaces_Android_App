@@ -20,8 +20,9 @@
     <string name="others">Others</string>
     <string name="submitrating">Rate This Place!</string>
     <string name="events">Events</string>
-    <string name="token">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL2xvY2FsaG9zdFwvZGJzZVwvcHVibGljXC9hcGlcL3YxXC9zaWduaW4iLCJpYXQiOjE0OTI5ODI2MjQsImV4cCI6MTQ5Mjk4NjIyNCwibmJmIjoxNDkyOTgyNjI0LCJqdGkiOiJ5WnhZOExLbmJwY0tuWFNwIn0.SnAnlH8Djk2abGAe2nqmvfrwYDgr0zOA8Bja0uYu5dc</string>
-    <string name="imageurl">http://e7f5836e.ngrok.io/dbse/public/</string>
+    <string name="token">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIsImlzcyI6Imh0dHA6XC9cL2xvY2FsaG9zdFwvZGJzZVwvcHVibGljXC9hcGlcL3YxXC9zaWduaW4iLCJpYXQiOjE0OTUyMDYzMjAsImV4cCI6MTQ5NTIwOTkyMCwibmJmIjoxNDk1MjA2MzIwLCJqdGkiOiJGaktBNE5CSGZnbDhGTzl4In0.1_jvhGfnJD969Hbw1a1dCjDf4sqAXkmMUOmSJVHv6WQ</string>
+    <string name="imageurl">http://cd0aa914.ngrok.io/dbse/public/</string>
+    <string name="url">http://cd0aa914.ngrok.io/dbse/public/api/v1/</string>
     <string name="your_string_here">
         <u>LocationOnMap</u>.
     </string>
@@ -75,7 +76,7 @@
     <string name="typelabel">Type</string>
     <string name="genderlabel">Gender</string>
 
-    <string name="url">http://6588b843.ngrok.io/dbse/public/api/v1/</string>
+
 
 
     <!--string for change the second next button to workspace when type is wso or pwso-->
@@ -134,11 +135,17 @@
     <string name="cafeteria">Cafeteria</string>
     <string name="cyber">Cyber</string>
     <string name="preferences">Preferences</string>
+    <string name="type">Type</string>
+    <string name="free">FREE</string>
+    <string name="paid">PAID</string>
 
-
-
-
+    <string-array name="money">
+        <item></item>
+        <item>@string/free</item>
+        <item>@string/paid</item>
+    </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

@@ -30,6 +30,11 @@
 
     <!-- price width in search-->
     <dimen name="price_width">90dp</dimen>
+    <!-- event name textsize-->
+    <dimen name="eventname">27dp</dimen>
+    <dimen name="eventaddress">20dp</dimen>
+    <dimen name="paddingforediteventbutton">30dp</dimen>
+    <dimen name="textview_event_profile">24dp</dimen>
 
 
 </resources>

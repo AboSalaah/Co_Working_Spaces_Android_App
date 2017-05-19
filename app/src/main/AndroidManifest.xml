@@ -19,18 +19,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".Activities.SignIn"
-            android:theme="@style/AppTheme.NoActionBar" >
-
-
-        </activity>
-        <activity android:name=".Activities.SignUp" >
-
-
-            </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Activities.SignUp" />
         <activity
             android:name=".Activities.Co_Working_Spaces"
             android:label="@string/listofschoolsactivityname" />
@@ -38,7 +31,9 @@
             android:name=".Activities.Co_Working_Space_Profile"
             android:label="@string/schoolprofile" />
         <activity android:name=".Activities.TempGovernorates" />
-        <activity android:name=".Activities.Temp_Co_Working_Spaces"></activity>
+        <activity android:name=".Activities.Temp_Co_Working_Spaces" />
+        <activity android:name=".Activities.Events" />
+        <activity android:name=".Activities.EventProfile"></activity>
     </application>
 
 </manifest>

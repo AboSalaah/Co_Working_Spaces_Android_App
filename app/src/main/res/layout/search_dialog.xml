@@ -46,53 +46,23 @@
             style="@style/searchdialogitemslabels"
             android:id="@+id/co_working_space_search_city"
             />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/price"
-            style="@style/searchdialogitems"
-            android:layout_marginTop="@dimen/itempadding"
-            android:textColor="@color/white"
-            />
-        <LinearLayout
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             style="@style/searchdialogitems"
+             android:layout_marginTop="@dimen/itempadding"
+             android:textColor="@color/white"
+             android:text="@string/type"
+             />
+        <Spinner
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-
+            android:layout_height="@dimen/edittexthieghtsignup"
+            android:id="@+id/search_money_spinner"
+            style="@android:style/Widget.Spinner.DropDown"
+            android:layout_marginBottom="@dimen/itempadding"
             >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/lower_bound"
-                style="@style/searchdialogitems"
-                android:layout_marginTop="@dimen/itempadding"
-                android:textColor="@color/white"
-                />
-            <EditText
-                android:layout_width="@dimen/price_width"
-                android:layout_height="wrap_content"
-                style="@style/searchdialogitemslabels"
-                android:layout_marginTop="@dimen/itempadding"
-                android:id="@+id/co_working_space_search_price_from"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/upper_bound"
-                style="@style/searchdialogitems"
-                android:layout_marginTop="@dimen/itempadding"
-                android:textColor="@color/white"
-                />
-            <EditText
-                android:layout_width="@dimen/price_width"
-                android:layout_height="wrap_content"
-                style="@style/searchdialogitemslabels"
-                android:layout_marginTop="@dimen/itempadding"
-                android:id="@+id/co_working_space_search_price_to"
-                />
+        </Spinner>
 
-        </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

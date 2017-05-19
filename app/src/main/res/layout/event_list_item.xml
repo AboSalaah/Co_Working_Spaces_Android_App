@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dbsecolor"
+    >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/event_name_text_view"
+        android:textSize="@dimen/eventname"
+        android:textColor="@color/notselectedstarscolor"
+        tools:text="dreampark"
+        android:textStyle="bold"
+        android:padding="@dimen/itempadding"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/event_address_text_view"
+        tools:text="giza,egypt"
+        android:textStyle="italic"
+        android:textSize="@dimen/eventaddress"
+        android:padding="@dimen/itempadding"
+        android:textColor="@color/notselectedstarscolor"
+        />
+
+</LinearLayout>
