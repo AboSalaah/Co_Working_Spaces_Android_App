@@ -58,7 +58,7 @@ public class ViewProfileFragement extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         firstLetter = (TextView) getActivity().findViewById(R.id.View_Profile_textincircle);
-        URL = new StringBuilder(getString(R.string.url)+"visitor/"+String.valueOf(SignIn.id)+"?token=");
+        URL = new StringBuilder(getString(R.string.url)+SignIn.userType+"/"+String.valueOf(SignIn.id)+"?token=");
         URL.append(SignIn.token);
         //connect();
 

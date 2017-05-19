@@ -51,7 +51,7 @@ public class TempGovernorates extends AppCompatActivity {
             }
         });
 
-        Url.append(getString(R.string.url)+"schoollocation"+"?token="+ SignIn.token);
+        Url.append(getString(R.string.url)+"workspaceslist");
         connect();
 
 

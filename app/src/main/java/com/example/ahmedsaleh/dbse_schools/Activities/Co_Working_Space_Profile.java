@@ -38,12 +38,14 @@ public class Co_Working_Space_Profile extends AppCompatActivity {
     public static String userType="def";
     FloatingActionButton editWorkSpace;
     private Button co_working_space_events_button;
+    private String havews;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_co_working_space_profile);
         final Intent intent=getIntent();
         final String co_working_spaceid=intent.getStringExtra("id");
+        havews=intent.getStringExtra("have");
         editWorkSpace=(FloatingActionButton)findViewById(R.id.fab);
         co_working_space_events_button=(Button)findViewById(R.id.co_working_space_profile_events_button);
         co_working_space_events_button.setOnClickListener(new View.OnClickListener() {
@@ -55,7 +57,7 @@ public class Co_Working_Space_Profile extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        if(userType.equals(getString(R.string.wso))||userType.equals(getString(R.string.pwso)))
+        if(userType.equals(getString(R.string.wso))||userType.equals(getString(R.string.pwso))||havews.equals("false"))
         {
             editWorkSpace.setVisibility(View.GONE);
         }

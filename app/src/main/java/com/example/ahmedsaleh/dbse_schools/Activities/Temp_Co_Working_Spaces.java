@@ -78,13 +78,14 @@ public class Temp_Co_Working_Spaces extends AppCompatActivity {
                 if(!coWorkingSpaceAdapter.isEmpty())
                 {
                     Url.setLength(0);
-                    Url.append(getString(R.string.url)+"workspaceVerfiy?token="+ SignIn.token);
+                    Url.append(getString(R.string.url)+"workspaceVerfiy");
                     params.put("workspace_id",coWorkingSpace.getmId());
                     connectoToVerfifyWorkSpace();
+                    verifyWorkspaceEmail();
                 }
             }
         });
-        Url.append(getString(R.string.url)+"schoollocation/"+govname+"?token="+SignIn.token);
+        Url.append(getString(R.string.url)+"workspaceslist/"+govname);
         connect();
     }
     /**
@@ -121,16 +122,20 @@ public class Temp_Co_Working_Spaces extends AppCompatActivity {
                                 JSONObject jsonObject=jsonArray.getJSONObject(i);
                                 if(jsonObject.has("name")&&!jsonObject.getString("name").equals("null"))
                                 {
-                                    String schoolname=jsonObject.getString("name");
+                                    String co_working_space_name=jsonObject.getString("name");
                                     if(jsonObject.has("id"))
                                     {
-                                        String schoolid=String.valueOf(jsonObject.getInt("id"));
+                                        String co_working_space_id=String.valueOf(jsonObject.getInt("id"));
                                         if(jsonObject.has("logo")&&!jsonObject.getString("logo").equals("null")&&jsonObject.getString("logo").contains("storage"))
                                         {
-                                            String schoollogo=getString(R.string.imageurl)+jsonObject.getString("logo");
-                                            // schools.add(new CoWorkingSpace(schoolname,schoolid,schoollogo));
-
+                                            String co_working_space_logo=getString(R.string.imageurl)+jsonObject.getString("logo");
+                                            if(jsonObject.has("rate"))
+                                            {
+                                                double co_working_space_rate=jsonObject.getDouble("rate");
+                                                schools.add(new Co_Working_Space(co_working_space_name,co_working_space_id,co_working_space_logo,(float)co_working_space_rate));
+                                            }
                                         }
+
                                     }
                                 }
                             }
@@ -151,7 +156,6 @@ public class Temp_Co_Working_Spaces extends AppCompatActivity {
         });
 
     }
-
     void connectoToVerfifyWorkSpace()
     {
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
@@ -182,7 +186,6 @@ public class Temp_Co_Working_Spaces extends AppCompatActivity {
                             JSONObject json = new JSONObject(result);
                             confirmCode = json.get("code").toString();
                             Toast.makeText(Temp_Co_Working_Spaces.this, json.get("msg").toString(), Toast.LENGTH_LONG).show();
-                            verifyWorkspaceEmail();
 
                         } catch (JSONException e) {
                             Toast.makeText(Temp_Co_Working_Spaces.this,"sending to this email failed!", Toast.LENGTH_LONG).show();

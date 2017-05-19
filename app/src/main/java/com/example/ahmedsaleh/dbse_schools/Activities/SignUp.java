@@ -203,10 +203,17 @@ public class SignUp extends AppCompatActivity {
                 String mystr = confirmCodeEditText.getText().toString();
                 if(mystr.equals(confirmCode)) {
                     realname.setVisibility(View.VISIBLE);
-                    if(userType.equals(getString(R.string.pwso))||userType.equals(getString(R.string.wso))){phonenumber.setVisibility(View.VISIBLE);}
-                    genderRadioGroup.setVisibility(View.VISIBLE);
                     secondNextButton.setVisibility(View.VISIBLE);
-                    secondNextButton.setText(getString(R.string.yourworkspace));
+                    if(userType.equals(getString(R.string.pwso))||userType.equals(getString(R.string.wso))){phonenumber.setVisibility(View.VISIBLE);
+                        secondNextButton.setText(getString(R.string.yourworkspace));
+
+                    }
+                    else
+                    {
+                        secondNextButton.setText(getString(R.string.next));
+                    }
+                    genderRadioGroup.setVisibility(View.VISIBLE);
+
 
                 } else {
 

@@ -1,6 +1,7 @@
 package com.example.ahmedsaleh.dbse_schools.Activities;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,6 +32,7 @@ public class Events extends AppCompatActivity {
     private EventsAdapter eventsAdapter;
     private String result;
     private StringBuilder Url=new StringBuilder();
+    private FloatingActionButton addEventButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +54,12 @@ public class Events extends AppCompatActivity {
                 Intent intent=new Intent(Events.this,EventProfile.class);
                 intent.putExtra("id", event.getmEventId());
                 startActivity(intent);
+            }
+        });
+        addEventButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
         Url.append(getString(R.string.url)+"workspacesevents/"+workspaceid+"?token="+SignIn.token);

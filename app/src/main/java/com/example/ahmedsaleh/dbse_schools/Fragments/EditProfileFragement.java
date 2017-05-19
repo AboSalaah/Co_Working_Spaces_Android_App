@@ -89,7 +89,7 @@ public class EditProfileFragement extends Fragment {
                 }
             }
         });
-        URL = new StringBuilder(getString(R.string.url)+"visitor/"+String.valueOf(SignIn.id)+"?token=");
+        URL = new StringBuilder(getString(R.string.url)+SignIn.userType+"/"+String.valueOf(SignIn.id)+"?token=");
         Log.v("myyyyyyyyyyyyyyyy",String.valueOf(SignIn.id));
         URL.append(SignIn.token);
        // connectToGet();

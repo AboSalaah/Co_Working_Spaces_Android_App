@@ -20,7 +20,7 @@
     <string name="others">Others</string>
     <string name="submitrating">Rate This Place!</string>
     <string name="events">Events</string>
-    <string name="token">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIsImlzcyI6Imh0dHA6XC9cL2xvY2FsaG9zdFwvZGJzZVwvcHVibGljXC9hcGlcL3YxXC9zaWduaW4iLCJpYXQiOjE0OTUyMDYzMjAsImV4cCI6MTQ5NTIwOTkyMCwibmJmIjoxNDk1MjA2MzIwLCJqdGkiOiJGaktBNE5CSGZnbDhGTzl4In0.1_jvhGfnJD969Hbw1a1dCjDf4sqAXkmMUOmSJVHv6WQ</string>
+    <string name="token">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIsImlzcyI6Imh0dHA6XC9cL2xvY2FsaG9zdFwvZGJzZVwvcHVibGljXC9hcGlcL3YxXC9zaWduaW4iLCJpYXQiOjE0OTUyMjAxNjYsImV4cCI6MTQ5NTIyMzc2NiwibmJmIjoxNDk1MjIwMTY2LCJqdGkiOiJBWHE1bzA0QTA0ZDQxSjlWIn0.9QVDzm8ntsItpq8gDltRjQMIyzBSVgf3Iq58ZzZxK_w</string>
     <string name="imageurl">http://cd0aa914.ngrok.io/dbse/public/</string>
     <string name="url">http://cd0aa914.ngrok.io/dbse/public/api/v1/</string>
     <string name="your_string_here">

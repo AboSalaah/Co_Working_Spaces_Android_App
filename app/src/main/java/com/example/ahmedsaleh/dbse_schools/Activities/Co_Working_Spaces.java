@@ -47,10 +47,12 @@ public class Co_Working_Spaces extends AppCompatActivity {
     private ListView listView;
     public static String userType;
     private Button searchButton;
-    private String workspaceMoney;//free or paid
+    private String workspaceMoney=new String();//free or paid
     private String govname;
     private HashMap<String ,String>params;
     private Spinner moneey;
+    private JSONObject jsonObject;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +83,11 @@ public class Co_Working_Spaces extends AppCompatActivity {
                 Co_Working_Space coWorkingSpace =(Co_Working_Space)parent.getItemAtPosition(position);
                 Intent intent=new Intent(Co_Working_Spaces.this,Co_Working_Space_Profile.class);
                 intent.putExtra("id", coWorkingSpace.getmId());
+                if(coWorkingSpace.getmId().equals(SignIn.workSpaceId))
+                {
+                    intent.putExtra("have","true");
+                }
+                else intent.putExtra("have","false");
                 startActivity(intent);
             }
         });
@@ -206,26 +213,88 @@ public class Co_Working_Spaces extends AppCompatActivity {
                 Url.setLength(0);
                 Url.append(getString(R.string.url)+"workspacessearch?token="+getString(R.string.token));
                Toast.makeText(Co_Working_Spaces.this,"OK",Toast.LENGTH_SHORT).show();
-                params=new HashMap<String, String>();
-                if(!co_working_space_name.equals(""))
-                {params.put("name",co_working_space_name.getText().toString());}
 
-               if(!co_working_space_city.equals("")){ params.put("city",co_working_space_city.getText().toString());}
-                params.put("air_conditioning",((air_condition.isChecked())?"1":"0"));
-                params.put("private_rooms",((privaterooms.isChecked())?"1":"0"));
-                params.put("data_show",((data_show.isChecked())?"1":"0"));
-                params.put("wifi",((wifi.isChecked())?"1":"0"));
-                params.put("laser_cutter",((laser_cutter.isChecked())?"1":"0"));
-                params.put("printing_3D",((printing_3d.isChecked())?"1":"0"));
-                params.put("PCB_printing",((pcb_printing.isChecked())?"1":"0"));
-                params.put("girls_area",((girls_area.isChecked())?"1":"0"));
-                params.put("smoking_area",((smoking_area.isChecked())?"1":"0"));
-                params.put("cafeteria",((cafeteria.isChecked())?"1":"0"));
-                params.put("cyber",((cyber.isChecked())?"1":"0"));
-                params.put("type",workspaceMoney);
-                params.put("state",govname);
+                jsonObject=new JSONObject();
+                if(!co_working_space_name.getText().toString().isEmpty())
+                {
+                    try {
+                        jsonObject.put("name",co_working_space_name.getText().toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
 
-                SearchConnection();
+               if(!co_working_space_city.getText().toString().isEmpty()){
+
+
+                   try {
+                       jsonObject.put("city",co_working_space_city.getText().toString());
+                   } catch (JSONException e) {
+                       e.printStackTrace();
+                   }
+               }
+
+                try {
+
+
+                    if (air_condition.isChecked()) {
+
+                        jsonObject.put("air_conditioning", 1);
+                    }
+                    if (privaterooms.isChecked()) {
+
+                        jsonObject.put("private_rooms",1);
+                    }
+                    if (data_show.isChecked())
+                    {
+                        jsonObject.put("data_show", 1);
+                    }
+                    if (wifi.isChecked())
+                    {
+                        jsonObject.put("wifi", 1);
+                    }
+                    if (laser_cutter.isChecked()) {
+
+                        jsonObject.put("laser_cutter",1);
+                    }
+                    if (printing_3d.isChecked())
+                    {
+
+                        jsonObject.put("printing_3D", 1);
+                    }
+                    if (pcb_printing.isChecked()) {
+
+                        jsonObject.put("PCB_printing", "1");
+                    }
+                    if (girls_area.isChecked())
+                    {
+                      jsonObject.put("girls_area", 1);
+                    }
+                    if (smoking_area.isChecked())
+                    {
+                    jsonObject.put("smoking_area",1);
+                    }
+                    if (cafeteria.isChecked())
+                    {
+                      jsonObject.put("cafeteria", 1);
+                    }
+                    if (cyber.isChecked())
+                    {
+                        jsonObject.put("cyber", 1);
+                    }
+
+                    if (!workspaceMoney.isEmpty()) {
+
+                        jsonObject.put("type", workspaceMoney);
+                    }
+
+                    jsonObject.put("state", govname);
+                    SearchConnection();
+                }
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
+                }
 
             }
         });
@@ -245,8 +314,10 @@ public class Co_Working_Spaces extends AppCompatActivity {
     {
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         JSONObject parameter = new JSONObject(params);
+        Log.i("my tag",parameter.toString());
         OkHttpClient client = new OkHttpClient();
-        RequestBody body = RequestBody.create(JSON, parameter.toString());
+        RequestBody body = RequestBody.create(JSON, jsonObject.toString());
+        Log.i("my tagggg",jsonObject.toString());
         Request request = new Request.Builder()
                 .url(Url.toString())
                 .post(body)

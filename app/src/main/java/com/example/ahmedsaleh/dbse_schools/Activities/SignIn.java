@@ -36,9 +36,9 @@ import okhttp3.Response;
 
 public class SignIn extends AppCompatActivity {
 
-    EditText userOrEmail;
-    EditText password;
-    Button signInButton;
+   private EditText userOrEmail;
+    private EditText password;
+    private Button signInButton;
     EditText emailForgetPassword;
     TextView forgotPassword;
     TextView signUpTextView;
@@ -47,6 +47,8 @@ public class SignIn extends AppCompatActivity {
     StringBuilder URL;
     public static String token;
     public static int id;
+    public static String userType;
+    public static String workSpaceId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +65,7 @@ public class SignIn extends AppCompatActivity {
             public void onClick(View view) {
                 URL = new StringBuilder(getString(R.string.url)+"signin");
                 if(validate()){
-                   // connect();
+                    connect();
                 }
             }
         });
@@ -94,7 +96,7 @@ public class SignIn extends AppCompatActivity {
                         // User clicked OK button
                         URL = new StringBuilder(getString(R.string.url)+"forgetpassword");
                         emailForgetPassword = (EditText) mview.findViewById(R.id.forget_password_code_editText);
-                        //connectForgetPassword();
+                        connectForgetPassword();
                     }
                 });
                 mBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -260,7 +262,15 @@ public class SignIn extends AppCompatActivity {
                                         .putString("id", json.getString("id")).commit();
                                 id = Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
                                         .getString("id", "defaultStringIfNothingFound"));
-                                moveToMainActivity();
+                                userType=json.getString("type");
+                                if(userType.equals("visitor"))moveToMainActivity();
+                                else
+                                {
+                                    workSpaceId=json.getString("workspaceid");
+                                    Intent intent=new Intent(SignIn.this,EventProfile.class);
+                                    intent.putExtra("id", workSpaceId);
+                                    startActivity(intent);
+                                }
                             } catch (JSONException ex){
                                 ex.printStackTrace();
                             }

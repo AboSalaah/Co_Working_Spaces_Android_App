@@ -19,11 +19,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class EventProfile extends AppCompatActivity {
@@ -47,12 +52,15 @@ public class EventProfile extends AppCompatActivity {
     private Button submitEdit;
     private StringBuilder Url=new StringBuilder();
     private String result;
+    private HashMap<String,String>params=new HashMap<>();
+    private String url;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_profile);
         Intent intent=getIntent();
         EventId=intent.getStringExtra("id");
+        url=getString(R.string.url);
         eventname=(TextView)findViewById(R.id.event_profile_name);
         eventaddress=(TextView)findViewById(R.id.event_profile_address);
         eventdesc=(TextView)findViewById(R.id.event_profile_desc);
@@ -98,16 +106,82 @@ public class EventProfile extends AppCompatActivity {
         submitEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boolean ok=true;
+                if(eventnamee.getVisibility()!=View.GONE)
+                {
+                    if(!eventnamee.getText().toString().isEmpty())
+                    finaleventname=eventnamee.getText().toString();
+                    else
+                    {
+                       eventnamee.setError("Event Name "+(getString(R.string.emptyerror)));
+                        ok=false;
+                    }
+                }
+                else
+                {
+                    finaleventname=eventname.getText().toString();
+                }
+                if(eventaddresss.getVisibility()!=View.GONE)
+                {
+                    if(!eventaddresss.getText().toString().isEmpty())
+                    finaleventname=eventaddresss.getText().toString();
+                    else
+                    {
+                        eventaddresss.setError("Event Name "+(getString(R.string.emptyerror)));
+                        ok=false;
+                    }
+                }
+                else
+                {
+                    finaleventname=eventaddress.getText().toString();
+                }
+                if(eventdescc.getVisibility()!=View.GONE)
+                {
+                    if(eventdescc.getText().toString().isEmpty())
+                    finaleventname=eventdescc.getText().toString();
+                    else
+                    {
+                        eventdescc.setError("Event Name "+(getString(R.string.emptyerror)));
+                        ok=false;
+                    }
+
+                }
+                else
+                {
+                    finaleventname=eventdesc.getText().toString();
+                }
+                if(ok) {
+                    params.clear();
+                    params.put("name", finaleventname);
+                    params.put("address", finaleventaddress);
+                    params.put("description", finaleventdesc);
+                    eventnamee.setVisibility(View.GONE);
+                    eventaddresss.setVisibility(View.GONE);
+                    eventdescc.setVisibility(View.GONE);
+                    eventname.setVisibility(View.VISIBLE);
+                    eventaddress.setVisibility(View.VISIBLE);
+                    eventdescc.setVisibility(View.VISIBLE);
+                    eventname.setText(finaleventname);
+                    eventaddress.setText(finaleventaddress);
+                    eventdesc.setText(finaleventdesc);
+                    Url.setLength(0);
+                    Url.append(url+"event/"+EventId+"?token="+getString(R.string.token));
+                    EditEventConnection();
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(),"Please Fill The Empty Fields",Toast.LENGTH_LONG).show();
+                }
 
             }
         });
-        if(!userType.equals(getString(R.string.wso))&&!userType.equals(getString(R.string.pwso))) {
+        if(!SignIn.userType.equals(getString(R.string.wso))&&!SignIn.userType.equals(getString(R.string.pwso))) {
             event_Desc_Action_Button.setVisibility(View.GONE);
             event_Address_Action_Button.setVisibility(View.GONE);
             event_Name_Action_Button.setVisibility(View.GONE);
             submitEdit.setVisibility(View.GONE);
         }
-        Url.append(getString(R.string.url)+"event/"+EventId+"?token="+getString(R.string.token));
+        Url.append(url+"event/"+EventId+"?token="+getString(R.string.token));
         connect();
 
 
@@ -148,6 +222,43 @@ public class EventProfile extends AppCompatActivity {
                 });
 
 
+
+            }
+        });
+
+    }
+    private void EditEventConnection()
+    {
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        JSONObject parameter = new JSONObject(params);
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = RequestBody.create(JSON, parameter.toString());
+        Request request = new Request.Builder()
+                .url(Url.toString())
+                .put(body)
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                result = response.body().string().toString();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        JSONObject json = null;
+                        try {
+                            json = new JSONObject(result);
+                            Toast.makeText(EventProfile.this, json.get("msg").toString(), Toast.LENGTH_LONG).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
 
             }
         });
