@@ -20,6 +20,7 @@
             android:layout_width="@dimen/image_school_list"
             android:layout_height="@dimen/image_school_list"
             android:id="@+id/co_working_space_logo_image_view"
+            android:layout_marginTop="@dimen/itempadding"
             />
     </LinearLayout>
     <RatingBar

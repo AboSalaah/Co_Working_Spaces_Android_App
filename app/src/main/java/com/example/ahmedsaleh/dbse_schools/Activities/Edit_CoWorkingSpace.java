@@ -17,6 +17,8 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -34,10 +36,7 @@ public class Edit_CoWorkingSpace extends AppCompatActivity {
     EditText websiteEditText;
     EditText facebookEditText;
     EditText descriptionEditText;
-    EditText cityEditText;
     EditText classificationEditText;
-    EditText feesEditText;
-    EditText locationOnMapEditText;
     CheckBox airConditioningCheckbox;
     CheckBox privateRoomsCheckbox;
     CheckBox datashowCheckbox;
@@ -53,6 +52,7 @@ public class Edit_CoWorkingSpace extends AppCompatActivity {
 
     private StringBuilder Url=new StringBuilder();
     private String result;
+    private JSONObject json;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +65,6 @@ public class Edit_CoWorkingSpace extends AppCompatActivity {
          facebookEditText = (EditText) findViewById(R.id.Workspace_facebook_editText);
          descriptionEditText = (EditText) findViewById(R.id.Workspace_description_editText);
          classificationEditText = (EditText) findViewById(R.id.Workspace_classification_editText);
-         feesEditText = (EditText) findViewById(R.id.Workspace_fees_editText);
          airConditioningCheckbox = (CheckBox) findViewById(R.id.air_condition_check_box_editprofile);
          privateRoomsCheckbox = (CheckBox) findViewById(R.id.private_rooms_check_box_editprofile);
          datashowCheckbox = (CheckBox) findViewById(R.id.data_show_check_box_editprofile);
@@ -73,12 +72,13 @@ public class Edit_CoWorkingSpace extends AppCompatActivity {
          laserCutterCheckbox = (CheckBox) findViewById(R.id.laser_cutter_check_box_editprofile);
          printing3DCheckbox = (CheckBox) findViewById(R.id.printing_3d_check_box_editprofile);
          PCBPrintingCheckbox = (CheckBox) findViewById(R.id.pcb_printing_check_box_editprofile);
+        girlsAreasCheckbox = (CheckBox) findViewById(R.id.girls_area_check_box_editprofile);
          smokingAreasCheckbox = (CheckBox) findViewById(R.id.smoking_area_check_box_editprofile);
          cafeteriaCheckbox = (CheckBox) findViewById(R.id.cafeteria_checkbox_editprofile);
          cyberCheckbox = (CheckBox) findViewById(R.id.cyber_check_box_editprofile);
 
 
-        Url = new StringBuilder(getString(R.string.url)+"workspace"+SignIn.workSpaceId+"?token=");
+        Url = new StringBuilder(getString(R.string.url)+"workspace/"+SignIn.workSpaceId+"?token=");
         Url.append(SignIn.token);
 
         connectToGet();
@@ -128,24 +128,26 @@ public class Edit_CoWorkingSpace extends AppCompatActivity {
                         try {
                             Log.i("tag","resulttttt "+result);
                             JSONObject jsonObject=new JSONObject(result);
-                            nameEditText.setText(jsonObject.get("name").toString());
-                            linkVideoEditText.setText(jsonObject.get("video").toString());
-                            contactsEditText.setText(jsonObject.get("contacts").toString());
-                            websiteEditText.setText(jsonObject.get("website_url").toString());
-                            facebookEditText.setText(jsonObject.get("facebook_page").toString());
-                            descriptionEditText.setText(jsonObject.get("description").toString());
-                            classificationEditText.setText(jsonObject.get("classification").toString());
+                            JSONObject jsonObject1 = jsonObject.getJSONObject("workspace");
+                            nameEditText.setText(jsonObject1.get("name").toString());
+                            linkVideoEditText.setText(jsonObject1.get("video").toString());
+                            contactsEditText.setText(jsonObject1.get("contacts").toString());
+                            websiteEditText.setText(jsonObject1.get("website_url").toString());
+                            facebookEditText.setText(jsonObject1.get("facebook_page").toString());
+                            descriptionEditText.setText(jsonObject1.get("description").toString());
+                            classificationEditText.setText(jsonObject1.get("classification").toString());
 
-                            if(Integer.parseInt(jsonObject.get("air_conditioning").toString()) == 1)airConditioningCheckbox.toggle();
-                            if(Integer.parseInt(jsonObject.get("private_rooms").toString()) == 1)privateRoomsCheckbox.toggle();
-                            if(Integer.parseInt(jsonObject.get("data_show").toString()) == 1)datashowCheckbox.toggle();
-                            if(Integer.parseInt(jsonObject.get("wifi").toString()) == 1)wifiCheckbox.toggle();
-                            if(Integer.parseInt(jsonObject.get("laser_cutter").toString()) == 1)laserCutterCheckbox.toggle();
-                            if(Integer.parseInt(jsonObject.get("printing_3D").toString()) == 1)printing3DCheckbox.toggle();
-                            if(Integer.parseInt(jsonObject.get("PCB_printing").toString()) == 1)PCBPrintingCheckbox.toggle();
-                            if(Integer.parseInt(jsonObject.get("girls_area").toString()) == 1)girlsAreasCheckbox.toggle();
-                            if(Integer.parseInt(jsonObject.get("smoking_area").toString()) == 1)smokingAreasCheckbox.toggle();
-                            if(Integer.parseInt(jsonObject.get("cyber").toString()) == 1)cyberCheckbox.toggle();
+                            if(Integer.parseInt(jsonObject1.get("air_conditioning").toString()) == 1)airConditioningCheckbox.toggle();
+                            if(Integer.parseInt(jsonObject1.get("private_rooms").toString()) == 1)privateRoomsCheckbox.toggle();
+                            if(Integer.parseInt(jsonObject1.get("data_show").toString()) == 1)datashowCheckbox.toggle();
+                            if(Integer.parseInt(jsonObject1.get("wifi").toString()) == 1)wifiCheckbox.toggle();
+                            if(Integer.parseInt(jsonObject1.get("laser_cutter").toString()) == 1)laserCutterCheckbox.toggle();
+                            if(Integer.parseInt(jsonObject1.get("printing_3D").toString()) == 1)printing3DCheckbox.toggle();
+                            if(Integer.parseInt(jsonObject1.get("PCB_printing").toString()) == 1)PCBPrintingCheckbox.toggle();
+                            if(Integer.parseInt(jsonObject1.get("girls_area").toString()) == 1)girlsAreasCheckbox.toggle();
+                            if(Integer.parseInt(jsonObject1.get("smoking_area").toString()) == 1)smokingAreasCheckbox.toggle();
+                            if(Integer.parseInt(jsonObject1.get("cafeteria").toString()) == 1)cafeteriaCheckbox.toggle();
+                            if(Integer.parseInt(jsonObject1.get("cyber").toString()) == 1)cyberCheckbox.toggle();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -162,32 +164,53 @@ public class Edit_CoWorkingSpace extends AppCompatActivity {
 
     void connectToPost() {
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("name", String.valueOf(nameEditText.getText()));
-        params.put("name", String.valueOf(linkVideoEditText.getText()));
-        params.put("contacts", String.valueOf(contactsEditText.getText()));
-        params.put("website_url", String.valueOf(websiteEditText.getText()));
-        params.put("facebook_page", String.valueOf(facebookEditText.getText()));
-        params.put("description", String.valueOf(descriptionEditText.getText()));
-        params.put("name", String.valueOf(cityEditText.getText()));
-        params.put("classification", String.valueOf(classificationEditText.getText()));
-        params.put("name", String.valueOf(feesEditText.getText()));
-        params.put("name", String.valueOf(locationOnMapEditText.getText()));
+        String link = String.valueOf(linkVideoEditText.getText());
+        String videoId = extractYTId(link);
+        for (int i=link.length()-1; i >= 0 ; i--){
+            if(!((link.charAt(i) >= 'a' && link.charAt(i) <= 'z')||(link.charAt(i) >= 'A' && link.charAt(i) <= 'Z'))){
+                break;
+            }
+            videoId = link.charAt(i)+videoId;
+        }
+
+        try {
+            json.put("name", String.valueOf(nameEditText.getText()));
+            json.put("video",videoId);
+            json.put("contacts", String.valueOf(contactsEditText.getText()));
+            json.put("website_url", String.valueOf(websiteEditText.getText()));
+            json.put("facebook_page", String.valueOf(facebookEditText.getText()));
+            json.put("description", String.valueOf(descriptionEditText.getText()));
+            json.put("classification", String.valueOf(classificationEditText.getText()));
+
+            if(airConditioningCheckbox.isChecked())json.put("air_conditioning",1); else json.put("air_conditioning",0);
+            if(privateRoomsCheckbox.isChecked())json.put("private_rooms",1); else json.put("private_rooms",0);
+            if(datashowCheckbox.isChecked())json.put("data_show",1); else json.put("data_show",0);
+            if(wifiCheckbox.isChecked())json.put("wifi",1); else json.put("wifi",0);
+            if(laserCutterCheckbox.isChecked())json.put("laser_cutter",1); else json.put("laser_cutter",0);
+            if(printing3DCheckbox.isChecked())json.put("printing_3D",1); else json.put("printing_3D",0);
+            if(PCBPrintingCheckbox.isChecked())json.put("PCB_printing",1); else json.put("PCB_printing",0);
+            if(girlsAreasCheckbox.isChecked())json.put("girls_area",1); else json.put("girls_area",0);
+            if(smokingAreasCheckbox.isChecked())json.put("smoking_area",1); else json.put("smoking_area",0);
+            if(cyberCheckbox.isChecked())json.put("cyber",1); else json.put("cyber",0);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
 
-        if(airConditioningCheckbox.isChecked())params.put("air_conditioning","1"); else params.put("air_conditioning","0");
-        if(airConditioningCheckbox.isChecked())params.put("private_rooms","1"); else params.put("private_rooms","0");
-        if(airConditioningCheckbox.isChecked())params.put("data_show","1"); else params.put("data_show","0");
-        if(airConditioningCheckbox.isChecked())params.put("wifi","1"); else params.put("wifi","0");
-        if(airConditioningCheckbox.isChecked())params.put("laser_cutter","1"); else params.put("laser_cutter","0");
-        if(airConditioningCheckbox.isChecked())params.put("printing_3D","1"); else params.put("printing_3D","0");
-        if(airConditioningCheckbox.isChecked())params.put("PCB_printing","1"); else params.put("PCB_printing","0");
-        if(airConditioningCheckbox.isChecked())params.put("girls_area","1"); else params.put("girls_area","0");
-        if(airConditioningCheckbox.isChecked())params.put("smoking_area","1"); else params.put("smoking_area","0");
-        if(airConditioningCheckbox.isChecked())params.put("cyber","1"); else params.put("cyber","0");
 
-        params.put("id", String.valueOf(SignIn.id));
-        JSONObject parameter = new JSONObject(params);
+
+        try {
+            json.put("id", String.valueOf(SignIn.id));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JSONObject parameter = null;
+        try {
+            parameter = new JSONObject(String.valueOf(json));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         OkHttpClient client = new OkHttpClient();
         RequestBody body = RequestBody.create(JSON, parameter.toString());
         Request request = new Request.Builder()
@@ -228,6 +251,18 @@ public class Edit_CoWorkingSpace extends AppCompatActivity {
 
             }
         });
+    }
+
+    public static String extractYTId(String ytUrl) {
+        String vId = null;
+        Pattern pattern = Pattern.compile(
+                "^https?://.*(?:youtu.be/|v/|u/\\w/|embed/|watch?v=)([^#&?]*).*$",
+                Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(ytUrl);
+        if (matcher.matches()){
+            vId = matcher.group(1);
+        }
+        return vId;
     }
 
 }

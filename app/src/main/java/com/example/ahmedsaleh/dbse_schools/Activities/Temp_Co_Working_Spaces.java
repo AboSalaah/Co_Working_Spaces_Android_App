@@ -27,6 +27,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import okhttp3.Call;
@@ -85,14 +86,15 @@ public class Temp_Co_Working_Spaces extends AppCompatActivity {
                 if(!coWorkingSpaceAdapter.isEmpty())
                 {
                     Url.setLength(0);
-                    Url.append(getString(R.string.url)+"workspaceVerfiy");
+                    Url.append(getString(R.string.url)+"workspaceverfiy");
+                    params=new HashMap<String, String>();
                     params.put("workspace_id",coWorkingSpace.getmId());
                     connectoToVerfifyWorkSpace();
-                    verifyWorkspaceEmail();
+                    //verifyWorkspaceEmail();
                 }
             }
         });
-        Url.append(getString(R.string.url)+"workspaceslist/"+govname);
+        Url.append(getString(R.string.url)+"workspacelist/"+govname);
         connect();
     }
     /**
@@ -206,6 +208,7 @@ public class Temp_Co_Working_Spaces extends AppCompatActivity {
                             JSONObject json = new JSONObject(result);
                             confirmCode = json.get("code").toString();
                             Toast.makeText(Temp_Co_Working_Spaces.this, json.get("msg").toString(), Toast.LENGTH_LONG).show();
+                            verifyWorkspaceEmail();
 
                         } catch (JSONException e) {
                             Toast.makeText(Temp_Co_Working_Spaces.this,"sending to this email failed!", Toast.LENGTH_LONG).show();
@@ -240,12 +243,13 @@ public class Temp_Co_Working_Spaces extends AppCompatActivity {
                 if(mystr.equals(confirmCode)) {
                     Url.setLength(0);
                     Url.append(getString(R.string.url)+"signup");
+                    dialog.dismiss();
                        connectToPost();
                 } else {
 
                     Toast.makeText(Temp_Co_Working_Spaces.this, "Wrong Code", Toast.LENGTH_LONG).show();
                 }
-                dialog.dismiss();
+               // dialog.dismiss();
             }
         });
         mBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -356,7 +360,7 @@ public class Temp_Co_Working_Spaces extends AppCompatActivity {
                 // User clicked OK butt
                 //here i should prepare the url with the search parameters
                 Url.setLength(0);
-                Url.append(getString(R.string.url)+"workspacessearch");
+                Url.append(getString(R.string.url)+"workspacesearch");
                 Toast.makeText(Temp_Co_Working_Spaces.this,"OK",Toast.LENGTH_SHORT).show();
 
                 jsonObject=new JSONObject();

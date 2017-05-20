@@ -262,9 +262,10 @@ public class SignIn extends AppCompatActivity {
                                 if(userType.equals("VISITOR")){workSpaceId="-1";moveToMainActivity();}
                                 else
                                 {
-                                    workSpaceId=json.getString("workspaceid");
-                                    Intent intent=new Intent(SignIn.this,EventProfile.class);
+                                    workSpaceId=json.getString("workspaceId");
+                                    Intent intent=new Intent(SignIn.this,Co_Working_Space_Profile.class);
                                     intent.putExtra("id", workSpaceId);
+                                    intent.putExtra("have","true");
                                     startActivity(intent);
                                 }
                             } catch (JSONException ex){

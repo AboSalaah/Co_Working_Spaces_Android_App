@@ -52,7 +52,7 @@ public class TempGovernorates extends AppCompatActivity {
             }
         });
 
-        Url.append(getString(R.string.url)+"workspaceslist");
+        Url.append(getString(R.string.url)+"workspacelist");
         connect();
 
 
@@ -92,10 +92,10 @@ public class TempGovernorates extends AppCompatActivity {
                             for(int i=0;i<jsonArray.length();++i)
                             {
                                 JSONObject jsonObject=jsonArray.getJSONObject(i);
-                                if(jsonObject.has("city")&&!jsonObject.getString("city").equals("null"))
+                                if(jsonObject.has("state")&&!jsonObject.getString("state").equals("state"))
                                 {
 
-                                    String name=jsonObject.getString("city");
+                                    String name=jsonObject.getString("state");
                                     data.add(name);
 
 

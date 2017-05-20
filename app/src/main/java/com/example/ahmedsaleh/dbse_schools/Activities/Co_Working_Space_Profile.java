@@ -58,7 +58,7 @@ public class Co_Working_Space_Profile extends YouTubeBaseActivity {
     public static String userType="def";
     FloatingActionButton editWorkSpace;
     private Button co_working_space_events_button;
-    private String havews;
+    private String havews="false";
     private JSONObject ratinng;
 
     private Toolbar toolbar;

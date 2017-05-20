@@ -23,12 +23,6 @@
             android:id="@+id/co_working_space_profile_name_label"
             style="@style/labels_profile_style"
             />
-        <com.google.android.youtube.player.YouTubePlayerView
-            android:id="@+id/youtube_player"
-            android:layout_width="match_parent"
-            android:layout_height="230dp">
-
-        </com.google.android.youtube.player.YouTubePlayerView>
 
 
         <LinearLayout
@@ -57,6 +51,12 @@
                 />
 
         </LinearLayout>
+        <com.google.android.youtube.player.YouTubePlayerView
+            android:id="@+id/youtube_player"
+            android:layout_width="match_parent"
+            android:layout_height="230dp">
+
+        </com.google.android.youtube.player.YouTubePlayerView>
         <android.support.v4.view.ViewPager
             android:layout_width="match_parent"
             android:layout_height="300dp"

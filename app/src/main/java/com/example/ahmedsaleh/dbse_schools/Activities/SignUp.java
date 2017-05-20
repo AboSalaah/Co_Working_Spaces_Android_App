@@ -95,7 +95,7 @@ public class SignUp extends AppCompatActivity {
                     Temp_Co_Working_Spaces.email=Email;
                     Temp_Co_Working_Spaces.password=Password;
                     connectToPostVerify();
-                    verifyemail();
+                   // verifyemail();
                 }
             }
         });
@@ -196,9 +196,24 @@ public class SignUp extends AppCompatActivity {
     void verifyemail()
     {
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         final AlertDialog.Builder mBuilder=new AlertDialog.Builder(SignUp.this);
         final View mview=getLayoutInflater().inflate(R.layout.codeinputdialog,null);
         mBuilder.setTitle(R.string.confirmationcode);
+
         mBuilder.setPositiveButton(R.string.submit, new DialogInterface.OnClickListener() {
 
             @Override
@@ -206,7 +221,10 @@ public class SignUp extends AppCompatActivity {
                 // User clicked OK button
                 confirmCodeEditText = (EditText) mview.findViewById(R.id.confirmation_code_editText);
                 String mystr = confirmCodeEditText.getText().toString();
+                Log.i("my code",confirmCode);
+                Log.i("my code2",mystr);
                 if(mystr.equals(confirmCode)) {
+                    dialog.dismiss();
                     realname.setVisibility(View.VISIBLE);
                     secondNextButton.setVisibility(View.VISIBLE);
                     if(userType.equals(getString(R.string.pwso))||userType.equals(getString(R.string.wso))){phonenumber.setVisibility(View.VISIBLE);
@@ -224,7 +242,7 @@ public class SignUp extends AppCompatActivity {
 
                     Toast.makeText(SignUp.this, "Wrong Code", Toast.LENGTH_LONG).show();
                 }
-                dialog.dismiss();
+
             }
         });
         mBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
