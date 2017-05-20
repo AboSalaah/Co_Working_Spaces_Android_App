@@ -14,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ahmedsaleh.dbse_schools.R;
@@ -51,6 +52,7 @@ public class SignUp extends AppCompatActivity {
     private String confirmCode;
     private String result=null;
     private StringBuilder URL;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,10 +63,13 @@ public class SignUp extends AppCompatActivity {
         phonenumber=(EditText)findViewById(R.id.singup_phone_number);
         firstNextButton=(Button)findViewById(R.id.signup_first_next_button);
         secondNextButton=(Button)findViewById(R.id.signup_second_next_button);
-       // genderRadioGroup.setVisibility(View.GONE);
-       // realname.setVisibility(View.GONE);
-       // phonenumber.setVisibility(View.GONE);
-       // secondNextButton.setVisibility(View.GONE);
+        username=(EditText)findViewById(R.id.signup_username);
+        password=(EditText)findViewById(R.id.signup_password);
+        email=(EditText)findViewById(R.id.signup_email);
+        genderRadioGroup.setVisibility(View.GONE);
+        realname.setVisibility(View.GONE);
+        phonenumber.setVisibility(View.GONE);
+        secondNextButton.setVisibility(View.GONE);
         genderRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {

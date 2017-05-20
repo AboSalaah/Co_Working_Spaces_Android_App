@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.ahmedsaleh.dbse_schools.Adapters.Governorates_Adapter;
 import com.example.ahmedsaleh.dbse_schools.R;
@@ -67,6 +68,13 @@ public class TempGovernorates extends AppCompatActivity {
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), getString(R.string.connectionproblem),
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
 
             }
 

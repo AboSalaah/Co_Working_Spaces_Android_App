@@ -223,6 +223,7 @@ public class SignIn extends AppCompatActivity {
         params.put("password", String.valueOf(password.getText()));
         JSONObject parameter = new JSONObject(params);
         OkHttpClient client = new OkHttpClient();
+        Log.i("sign in url",URL.toString());
         RequestBody body = RequestBody.create(JSON, parameter.toString());
         Request request = new Request.Builder()
                 .url(URL.toString())
@@ -243,6 +244,7 @@ public class SignIn extends AppCompatActivity {
             public void onResponse(okhttp3.Call call, final Response response) throws IOException {
                 result = response.body().string().toString();
                 Log.v("Response code", String.valueOf(response.code()));
+                Log.i("sign in result",result);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -254,16 +256,10 @@ public class SignIn extends AppCompatActivity {
                             e.printStackTrace();
                             try {
                                 JSONObject json = new JSONObject(result);
-                                PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit()
-                                        .putString("token", json.getString("token")).commit();
-                                token = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
-                                        .getString("token", "defaultStringIfNothingFound");
-                                PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit()
-                                        .putString("id", json.getString("id")).commit();
-                                id = Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
-                                        .getString("id", "defaultStringIfNothingFound"));
+                                token=json.getString("token");
+                                id=json.getInt("id");
                                 userType=json.getString("type");
-                                if(userType.equals("visitor"))moveToMainActivity();
+                                if(userType.equals("VISITOR")){workSpaceId="-1";moveToMainActivity();}
                                 else
                                 {
                                     workSpaceId=json.getString("workspaceid");

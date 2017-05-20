@@ -3,6 +3,8 @@
     package="com.example.ahmedsaleh.dbse_schools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
 
     <application
         android:allowBackup="true"
@@ -14,29 +16,45 @@
             android:name=".Activities.MainActivity"
             android:label="@string/listofgovernorates"
             android:theme="@style/AppTheme.NoActionBar">
+
+
+        </activity>
+        <activity
+            android:name=".Activities.SignIn"
+            android:label="DbSE CoWorking Spaces"
+            android:theme="@style/AppTheme.NoActionBar"
+            >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-        </activity>
-        <activity
-            android:name=".Activities.SignIn"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activities.SignUp" />
+            </activity>
+        <activity android:name=".Activities.SignUp"
+            android:label="SignUp"
+            />
         <activity
             android:name=".Activities.Co_Working_Spaces"
-            android:label="@string/listofschoolsactivityname" />
+            android:label="CoWorking Spaces" />
         <activity
             android:name=".Activities.Co_Working_Space_Profile"
-            android:label="CoWorking Spaces"/>
-        <activity android:name=".Activities.TempGovernorates" />
-        <activity android:name=".Activities.Temp_Co_Working_Spaces" />
-        <activity android:name=".Activities.Events" />
-        <activity android:name=".Activities.EventProfile"></activity>
-        <activity android:name=".Activities.Temp_Co_Working_Spaces" />
-        <activity android:name=".Activities.Edit_CoWorkingSpace"></activity>
+            android:label="CoWorking Space Profile"/>
+        <activity android:name=".Activities.TempGovernorates"
+            android:label="Select Your State"
+            />
+        <activity android:name=".Activities.Temp_Co_Working_Spaces"
+            android:label="Select Your Place"
+            />
+        <activity android:name=".Activities.Events"
+            android:label="Events"
+            />
+        <activity android:name=".Activities.EventProfile"
+            android:label="Event Profile"
+            ></activity>
+        <activity android:name=".Activities.Edit_CoWorkingSpace"
+            android:label="Edit WorkSpace"
+            ></activity>
     </application>
 
 </manifest>

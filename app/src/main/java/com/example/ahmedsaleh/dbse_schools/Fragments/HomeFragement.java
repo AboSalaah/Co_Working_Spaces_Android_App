@@ -77,7 +77,7 @@ public class HomeFragement extends Fragment {
             }
         });
 
-        Url.append(getString(R.string.url)+"workspaceslist"+"?token="+ getString(R.string.token));
+        Url.append(getString(R.string.url)+"workspaceslist"+"?token="+ SignIn.token);
         connect();
 
 

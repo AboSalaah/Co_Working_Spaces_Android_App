@@ -62,7 +62,7 @@ public class AboutDbseFragement extends Fragment {
         URL = new StringBuilder(getString(R.string.url)+"about");
         description = (TextView) getActivity().findViewById(R.id.dbse_description);
         website = (TextView) getActivity().findViewById(R.id.dbse_website);
-       // connect();
+        connect();
 
     }
 

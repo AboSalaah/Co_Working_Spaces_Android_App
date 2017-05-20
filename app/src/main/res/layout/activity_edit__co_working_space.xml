@@ -31,15 +31,7 @@
             android:id="@+id/Link_Video_editText"
          android:layout_width="match_parent"
          android:layout_height="wrap_content" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Location"/>
-        <EditText
-            android:id="@+id/Workspace_location_editText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -79,15 +71,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="City"/>
-        <EditText
-            android:id="@+id/Workspace_city_editText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="Classification"/>
         <EditText
             android:id="@+id/Workspace_classification_editText"
@@ -100,15 +83,6 @@
             android:text="Fees"/>
         <EditText
             android:id="@+id/Workspace_fees_editText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Location On Map"/>
-        <EditText
-            android:id="@+id/Workspace_locationOnMap_editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />

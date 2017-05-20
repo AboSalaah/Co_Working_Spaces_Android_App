@@ -91,7 +91,7 @@ public class Co_Working_Spaces extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        Url.append(getString(R.string.url)+"workspaceslist/"+govname+"?token="+getString(R.string.token));
+        Url.append(getString(R.string.url)+"workspaceslist/"+govname+"?token="+SignIn.token);
         connect();
     }
 
@@ -211,7 +211,7 @@ public class Co_Working_Spaces extends AppCompatActivity {
                 // User clicked OK butt
                 //here i should prepare the url with the search parameters
                 Url.setLength(0);
-                Url.append(getString(R.string.url)+"workspacessearch?token="+getString(R.string.token));
+                Url.append(getString(R.string.url)+"workspacessearch?token="+SignIn.token);
                Toast.makeText(Co_Working_Spaces.this,"OK",Toast.LENGTH_SHORT).show();
 
                 jsonObject=new JSONObject();
@@ -313,7 +313,12 @@ public class Co_Working_Spaces extends AppCompatActivity {
     void SearchConnection()
     {
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        JSONObject parameter = new JSONObject(params);
+        JSONObject parameter = null;
+        try {
+            parameter = new JSONObject(String.valueOf(jsonObject));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         Log.i("my tag",parameter.toString());
         OkHttpClient client = new OkHttpClient();
         RequestBody body = RequestBody.create(JSON, jsonObject.toString());
@@ -325,7 +330,13 @@ public class Co_Working_Spaces extends AppCompatActivity {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), getString(R.string.connectionproblem),
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
             }
 
             @Override

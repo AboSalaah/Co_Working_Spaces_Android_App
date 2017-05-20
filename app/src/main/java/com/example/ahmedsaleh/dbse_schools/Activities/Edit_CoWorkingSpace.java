@@ -46,6 +46,7 @@ public class Edit_CoWorkingSpace extends AppCompatActivity {
     CheckBox printing3DCheckbox;
     CheckBox PCBPrintingCheckbox;
     CheckBox girlsAreasCheckbox;
+    CheckBox smokingAreasCheckbox;
     CheckBox cafeteriaCheckbox;
     CheckBox cyberCheckbox;
 
@@ -63,10 +64,8 @@ public class Edit_CoWorkingSpace extends AppCompatActivity {
          websiteEditText = (EditText) findViewById(R.id.Workspace_website_editText);
          facebookEditText = (EditText) findViewById(R.id.Workspace_facebook_editText);
          descriptionEditText = (EditText) findViewById(R.id.Workspace_description_editText);
-         cityEditText = (EditText) findViewById(R.id.Workspace_city_editText);
          classificationEditText = (EditText) findViewById(R.id.Workspace_classification_editText);
          feesEditText = (EditText) findViewById(R.id.Workspace_fees_editText);
-         locationOnMapEditText = (EditText) findViewById(R.id.Workspace_locationOnMap_editText);
          airConditioningCheckbox = (CheckBox) findViewById(R.id.air_condition_check_box_editprofile);
          privateRoomsCheckbox = (CheckBox) findViewById(R.id.private_rooms_check_box_editprofile);
          datashowCheckbox = (CheckBox) findViewById(R.id.data_show_check_box_editprofile);
@@ -74,15 +73,15 @@ public class Edit_CoWorkingSpace extends AppCompatActivity {
          laserCutterCheckbox = (CheckBox) findViewById(R.id.laser_cutter_check_box_editprofile);
          printing3DCheckbox = (CheckBox) findViewById(R.id.printing_3d_check_box_editprofile);
          PCBPrintingCheckbox = (CheckBox) findViewById(R.id.pcb_printing_check_box_editprofile);
-         girlsAreasCheckbox = (CheckBox) findViewById(R.id.girls_area_check_box_editprofile);
+         smokingAreasCheckbox = (CheckBox) findViewById(R.id.smoking_area_check_box_editprofile);
          cafeteriaCheckbox = (CheckBox) findViewById(R.id.cafeteria_checkbox_editprofile);
          cyberCheckbox = (CheckBox) findViewById(R.id.cyber_check_box_editprofile);
 
 
-        Url = new StringBuilder(getString(R.string.url)+SignIn.type+String.valueOf(SignIn.id)+"?token=");
+        Url = new StringBuilder(getString(R.string.url)+"workspace"+SignIn.workSpaceId+"?token=");
         Url.append(SignIn.token);
 
-       // connectToGet();
+        connectToGet();
     }
 
     @Override
@@ -101,7 +100,7 @@ public class Edit_CoWorkingSpace extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.save_edit_workspace) {
-            //connectToPost();
+            connectToPost();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -130,15 +129,12 @@ public class Edit_CoWorkingSpace extends AppCompatActivity {
                             Log.i("tag","resulttttt "+result);
                             JSONObject jsonObject=new JSONObject(result);
                             nameEditText.setText(jsonObject.get("name").toString());
-                            linkVideoEditText.setText(jsonObject.get("name").toString());
+                            linkVideoEditText.setText(jsonObject.get("video").toString());
                             contactsEditText.setText(jsonObject.get("contacts").toString());
                             websiteEditText.setText(jsonObject.get("website_url").toString());
                             facebookEditText.setText(jsonObject.get("facebook_page").toString());
                             descriptionEditText.setText(jsonObject.get("description").toString());
-                            cityEditText.setText(jsonObject.get("name").toString());
                             classificationEditText.setText(jsonObject.get("classification").toString());
-                            feesEditText.setText(jsonObject.get("name").toString());
-                            locationOnMapEditText.setText(jsonObject.get("name").toString());
 
                             if(Integer.parseInt(jsonObject.get("air_conditioning").toString()) == 1)airConditioningCheckbox.toggle();
                             if(Integer.parseInt(jsonObject.get("private_rooms").toString()) == 1)privateRoomsCheckbox.toggle();
@@ -148,7 +144,7 @@ public class Edit_CoWorkingSpace extends AppCompatActivity {
                             if(Integer.parseInt(jsonObject.get("printing_3D").toString()) == 1)printing3DCheckbox.toggle();
                             if(Integer.parseInt(jsonObject.get("PCB_printing").toString()) == 1)PCBPrintingCheckbox.toggle();
                             if(Integer.parseInt(jsonObject.get("girls_area").toString()) == 1)girlsAreasCheckbox.toggle();
-                            if(Integer.parseInt(jsonObject.get("smoking_area").toString()) == 1)cafeteriaCheckbox.toggle();
+                            if(Integer.parseInt(jsonObject.get("smoking_area").toString()) == 1)smokingAreasCheckbox.toggle();
                             if(Integer.parseInt(jsonObject.get("cyber").toString()) == 1)cyberCheckbox.toggle();
 
                         } catch (JSONException e) {

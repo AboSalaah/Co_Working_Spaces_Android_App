@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View view) {
                 Intent DbSE_Intent = new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("https://www.dbse.co/schools"));
+                        Uri.parse("https://www.dbse.co/coworking"));
                 Intent chooser = Intent.createChooser(DbSE_Intent,"Open By");
                 startActivity(chooser);
             }

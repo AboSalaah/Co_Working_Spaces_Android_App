@@ -165,7 +165,7 @@ public class EventProfile extends AppCompatActivity {
                     eventaddress.setText(finaleventaddress);
                     eventdesc.setText(finaleventdesc);
                     Url.setLength(0);
-                    Url.append(url+"event/"+EventId+"?token="+getString(R.string.token));
+                    Url.append(url+"event/"+EventId+"?token="+SignIn.token);
                     EditEventConnection();
                 }
                 else
@@ -181,7 +181,7 @@ public class EventProfile extends AppCompatActivity {
             event_Name_Action_Button.setVisibility(View.GONE);
             submitEdit.setVisibility(View.GONE);
         }
-        Url.append(url+"event/"+EventId+"?token="+getString(R.string.token));
+        Url.append(url+"event/"+EventId+"?token="+SignIn.token);
         connect();
 
 
@@ -197,8 +197,14 @@ public class EventProfile extends AppCompatActivity {
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                Toast.makeText(getApplicationContext(), getString(R.string.connectionproblem),
-                        Toast.LENGTH_LONG).show();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), getString(R.string.connectionproblem),
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
+
             }
 
             @Override
@@ -240,6 +246,13 @@ public class EventProfile extends AppCompatActivity {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), getString(R.string.connectionproblem),
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
 
             }
 
@@ -249,11 +262,13 @@ public class EventProfile extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        JSONObject json = null;
                         try {
-                            json = new JSONObject(result);
-                            Toast.makeText(EventProfile.this, json.get("msg").toString(), Toast.LENGTH_LONG).show();
+                            JSONObject json = new JSONObject(result);
+                            String error = json.get("error").toString();
+                            Toast.makeText(EventProfile.this, error, Toast.LENGTH_LONG).show();
+
                         } catch (JSONException e) {
+                            Toast.makeText(EventProfile.this, "Editing Saved", Toast.LENGTH_LONG).show();
                             e.printStackTrace();
                         }
 

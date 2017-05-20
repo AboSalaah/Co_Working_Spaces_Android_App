@@ -8,9 +8,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.ahmedsaleh.dbse_schools.Adapters.Co_Working_Spaces_Adapter;
@@ -38,6 +41,7 @@ public class Temp_Co_Working_Spaces extends AppCompatActivity {
 
     private StringBuilder Url=new StringBuilder();
     private String result;
+    private String workspaceMoney=new String();//free or paid
     private Co_Working_Spaces_Adapter coWorkingSpaceAdapter;
     private ListView listView;
     private String confirmCode;
@@ -45,19 +49,22 @@ public class Temp_Co_Working_Spaces extends AppCompatActivity {
     private EditText confirmCodeEditText;
     private Button searchButton;
     public static String userType;
-    public static String realName;
-    public static String phoneNumber;
-    public static String gender;
-    public static String email;
-    public static String username;
-    public static String password;
+    public static String realName=new String();
+    public static String phoneNumber=new String();
+    public static String gender=new String();
+    public static String email=new String();
+    public static String username=new String();
+    public static String password=new String();
+    private JSONObject jsonObject;
+    private Spinner moneey;
+    String govname;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_temp__co__working__spaces);
         listView=(ListView)findViewById(R.id.temp_co_working_spaces_list_view);
         final Intent intent=getIntent();
-        String govname=intent.getStringExtra("name");
+        govname=intent.getStringExtra("name");
         final String realname=intent.getStringExtra("realname");
         searchButton=(Button)findViewById(R.id.temp_search_button);
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -103,8 +110,14 @@ public class Temp_Co_Working_Spaces extends AppCompatActivity {
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                Toast.makeText(getApplicationContext(), getString(R.string.connectionproblem),
-                        Toast.LENGTH_LONG).show();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), getString(R.string.connectionproblem),
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
+
             }
 
             @Override
@@ -169,6 +182,13 @@ public class Temp_Co_Working_Spaces extends AppCompatActivity {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), getString(R.string.connectionproblem),
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
 
             }
 
@@ -210,7 +230,7 @@ public class Temp_Co_Working_Spaces extends AppCompatActivity {
     {
         final AlertDialog.Builder mBuilder=new AlertDialog.Builder(Temp_Co_Working_Spaces.this);
         final View mview=getLayoutInflater().inflate(R.layout.codeinputdialog,null);
-        mBuilder.setTitle(R.string.confirmationworkspacecode);
+        mBuilder.setTitle(R.string.confirmworkingspaceemail);
         mBuilder.setPositiveButton(R.string.submit, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
@@ -297,22 +317,37 @@ public class Temp_Co_Working_Spaces extends AppCompatActivity {
         //mBuilder.setTitle(R.string.search);
 
 
-       /* EditText co_working_space_name=(EditText)getActivity().findViewById(R.id.co_working_space_search_name);
-        EditText co_working_space_city=(EditText)getActivity().findViewById(R.id.co_working_space_search_city);
-        EditText co_working_space_price_from=(EditText)getActivity().findViewById(R.id.co_working_space_search_price_from);
-        EditText co_working_space_price_to=(EditText)getActivity().findViewById(R.id.co_working_space_search_price_to);
-        CheckBox air_condition=(CheckBox)getActivity().findViewById(R.id.air_condition_check_box);
-        CheckBox privaterooms=(CheckBox)getActivity().findViewById(R.id.private_rooms_check_box);
-        CheckBox printing_3d=(CheckBox)getActivity().findViewById(R.id.printing_3d_check_box);
-        CheckBox pcb_printing=(CheckBox)getActivity().findViewById(R.id.pcb_printing_check_box);
-        CheckBox smoking_area=(CheckBox)getActivity().findViewById(R.id.smoking_area_check_box);
-        CheckBox girls_area=(CheckBox)getActivity().findViewById(R.id.girls_area_check_box);
-        CheckBox cyber=(CheckBox)getActivity().findViewById(R.id.cyber_check_box);
-        CheckBox data_show=(CheckBox)getActivity().findViewById(R.id.data_show_check_box);
-        CheckBox laser_cutter=(CheckBox)getActivity().findViewById(R.id.laser_cutter_check_box);
-        CheckBox cafeteria=(CheckBox)getActivity().findViewById(R.id.cafeteria_checkbox);
-        CheckBox wifi=(CheckBox)getActivity().findViewById(R.id.wifi_check_box);
-        */
+        final EditText co_working_space_name=(EditText)mview.findViewById(R.id.co_working_space_search_name);
+        final EditText co_working_space_city=(EditText)mview.findViewById(R.id.co_working_space_search_city);
+        moneey=(Spinner)mview.findViewById(R.id.search_money_spinner);
+        ArrayAdapter<CharSequence> types;
+        types=ArrayAdapter.createFromResource(this,R.array.money,android.R.layout.simple_spinner_item);
+        types.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        moneey.setAdapter(types);
+        moneey.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String item=(String)parent.getItemAtPosition(position);
+                if(item.equals(getString(R.string.free)))workspaceMoney=getString(R.string.free);
+                else if(item.equals(getString(R.string.paid)))workspaceMoney=getString(R.string.paid);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                workspaceMoney="";
+            }
+        });
+        final CheckBox air_condition=(CheckBox)mview.findViewById(R.id.air_condition_check_box);
+        final CheckBox privaterooms=(CheckBox)mview.findViewById(R.id.private_rooms_check_box);
+        final CheckBox printing_3d=(CheckBox)mview.findViewById(R.id.printing_3d_check_box);
+        final CheckBox pcb_printing=(CheckBox)mview.findViewById(R.id.pcb_printing_check_box);
+        final CheckBox smoking_area=(CheckBox)mview.findViewById(R.id.smoking_area_check_box);
+        final CheckBox girls_area=(CheckBox)mview.findViewById(R.id.girls_area_check_box);
+        final CheckBox cyber=(CheckBox)mview.findViewById(R.id.cyber_check_box);
+        final CheckBox data_show=(CheckBox)mview.findViewById(R.id.data_show_check_box);
+        final CheckBox laser_cutter=(CheckBox)mview.findViewById(R.id.laser_cutter_check_box);
+        final CheckBox cafeteria=(CheckBox)mview.findViewById(R.id.cafeteria_checkbox);
+        final CheckBox wifi=(CheckBox)mview.findViewById(R.id.wifi_check_box);
 
         mBuilder.setPositiveButton(R.string.submit, new DialogInterface.OnClickListener() {
 
@@ -320,8 +355,91 @@ public class Temp_Co_Working_Spaces extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int id) {
                 // User clicked OK butt
                 //here i should prepare the url with the search parameters
+                Url.setLength(0);
+                Url.append(getString(R.string.url)+"workspacessearch");
                 Toast.makeText(Temp_Co_Working_Spaces.this,"OK",Toast.LENGTH_SHORT).show();
 
+                jsonObject=new JSONObject();
+                if(!co_working_space_name.getText().toString().isEmpty())
+                {
+                    try {
+                        jsonObject.put("name",co_working_space_name.getText().toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                if(!co_working_space_city.getText().toString().isEmpty()){
+
+
+                    try {
+                        jsonObject.put("city",co_working_space_city.getText().toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                try {
+
+
+                    if (air_condition.isChecked()) {
+
+                        jsonObject.put("air_conditioning", 1);
+                    }
+                    if (privaterooms.isChecked()) {
+
+                        jsonObject.put("private_rooms",1);
+                    }
+                    if (data_show.isChecked())
+                    {
+                        jsonObject.put("data_show", 1);
+                    }
+                    if (wifi.isChecked())
+                    {
+                        jsonObject.put("wifi", 1);
+                    }
+                    if (laser_cutter.isChecked()) {
+
+                        jsonObject.put("laser_cutter",1);
+                    }
+                    if (printing_3d.isChecked())
+                    {
+
+                        jsonObject.put("printing_3D", 1);
+                    }
+                    if (pcb_printing.isChecked()) {
+
+                        jsonObject.put("PCB_printing", "1");
+                    }
+                    if (girls_area.isChecked())
+                    {
+                        jsonObject.put("girls_area", 1);
+                    }
+                    if (smoking_area.isChecked())
+                    {
+                        jsonObject.put("smoking_area",1);
+                    }
+                    if (cafeteria.isChecked())
+                    {
+                        jsonObject.put("cafeteria", 1);
+                    }
+                    if (cyber.isChecked())
+                    {
+                        jsonObject.put("cyber", 1);
+                    }
+
+                    if (!workspaceMoney.isEmpty()) {
+
+                        jsonObject.put("type", workspaceMoney);
+                    }
+
+                    jsonObject.put("state", govname);
+                    SearchConnection();
+                }
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
+                }
 
             }
         });
@@ -335,6 +453,82 @@ public class Temp_Co_Working_Spaces extends AppCompatActivity {
         AlertDialog dialog=mBuilder.create();
         dialog.show();
     }
+
+
+    void SearchConnection()
+    {
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        JSONObject parameter = new JSONObject(params);
+        Log.i("my tag",parameter.toString());
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = RequestBody.create(JSON, jsonObject.toString());
+        Log.i("my tagggg",jsonObject.toString());
+        Request request = new Request.Builder()
+                .url(Url.toString())
+                .post(body)
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), getString(R.string.connectionproblem),
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                result = response.body().string().toString();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+
+                        try {
+                            Log.i("tag","resultttt  "+result);
+                            ArrayList<Co_Working_Space>schools=new ArrayList<Co_Working_Space>();
+                            JSONArray jsonArray=new JSONArray(result);
+                            for(int i=0;i<jsonArray.length();++i)
+                            {
+                                JSONObject jsonObject=jsonArray.getJSONObject(i);
+                                if(jsonObject.has("name")&&!jsonObject.getString("name").equals("null"))
+                                {
+                                    String co_working_space_name=jsonObject.getString("name");
+                                    if(jsonObject.has("id"))
+                                    {
+                                        String co_working_space_id=String.valueOf(jsonObject.getInt("id"));
+                                        if(jsonObject.has("logo")&&!jsonObject.getString("logo").equals("null")&&jsonObject.getString("logo").contains("storage"))
+                                        {
+                                            String co_working_space_logo=getString(R.string.imageurl)+jsonObject.getString("logo");
+                                            if(jsonObject.has("rate"))
+                                            {
+                                                double co_working_space_rate=jsonObject.getDouble("rate");
+                                                schools.add(new Co_Working_Space(co_working_space_name,co_working_space_id,co_working_space_logo,(float)co_working_space_rate));
+                                            }
+                                        }
+
+                                    }
+                                }
+                            }
+                            Log.i("tag","size el araaay "+schools.size());
+                            coWorkingSpaceAdapter.clear();
+                            coWorkingSpaceAdapter.addAll(schools);
+                            coWorkingSpaceAdapter.notifyDataSetChanged();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+            }
+        });
+    }
+
 
 
 }

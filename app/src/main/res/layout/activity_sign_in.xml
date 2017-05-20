@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/singuprelativelayout"
-    android:background="@drawable/try5"
+    android:background="@color/dbsecolor"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -41,15 +41,7 @@
                 android:id="@+id/signIn_password"
                 android:inputType="textPassword"
                 android:hint="@string/sign_in_password_hint"/>
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/edittexthieghtsignup"
-                android:id="@+id/signip_type_spinner"
-                style="@android:style/Widget.Spinner.DropDown"
-                 android:layout_marginBottom="@dimen/itempadding"
-                >
 
-            </Spinner>
             <Button
                 android:id="@+id/sign_in_button"
                 android:layout_width="match_parent"

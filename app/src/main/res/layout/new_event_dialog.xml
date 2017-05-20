@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/paddingforediteventbutton"
+    android:background="@color/dbsecolor"
+    >
+    <EditText
+        android:id="@+id/add_event_name_editText"
+        style="@style/edittext_sign_in_up_style"
+        android:inputType="text"
+        android:hint="@string/name"
+        />
+    <EditText
+        android:id="@+id/add_event_address_editText"
+        style="@style/edittext_sign_in_up_style"
+        android:inputType="text"
+        android:hint="@string/eventadress"
+        />
+    <EditText
+        android:id="@+id/add_event_desc_edittext"
+        style="@style/edittext_sign_in_up_style"
+        android:inputType="text"
+        android:hint="@string/eventdesc"
+        />
+
+</LinearLayout>

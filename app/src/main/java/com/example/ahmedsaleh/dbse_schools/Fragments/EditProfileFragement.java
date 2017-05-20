@@ -89,10 +89,10 @@ public class EditProfileFragement extends Fragment {
                 }
             }
         });
-        URL = new StringBuilder(getString(R.string.url)+SignIn.userType+"/"+String.valueOf(SignIn.id)+"?token=");
+        URL = new StringBuilder(getString(R.string.url)+SignIn.userType.toLowerCase()+"/"+String.valueOf(SignIn.id)+"?token=");
         Log.v("myyyyyyyyyyyyyyyy",String.valueOf(SignIn.id));
         URL.append(SignIn.token);
-       // connectToGet();
+       connectToGet();
         Button saveButton = (Button) getActivity().findViewById(R.id.Save_changes_button);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
