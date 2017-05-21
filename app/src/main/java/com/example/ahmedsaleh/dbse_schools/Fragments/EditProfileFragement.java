@@ -169,6 +169,7 @@ public class EditProfileFragement extends Fragment {
         params.put("id", String.valueOf(SignIn.id));
         JSONObject parameter = new JSONObject(params);
         OkHttpClient client = new OkHttpClient();
+        Log.i("mytagprofile",parameter.toString());
         RequestBody body = RequestBody.create(JSON, parameter.toString());
         Request request = new Request.Builder()
                 .url(URL.toString())

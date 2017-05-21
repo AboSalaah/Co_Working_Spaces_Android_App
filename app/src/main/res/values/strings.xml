@@ -21,8 +21,8 @@
     <string name="submitrating">Rate This Place!</string>
     <string name="events">Events</string>
     <string name="token">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIsImlzcyI6Imh0dHA6XC9cL2xvY2FsaG9zdFwvZGJzZVwvcHVibGljXC9hcGlcL3YxXC9zaWduaW4iLCJpYXQiOjE0OTUyMjAxNjYsImV4cCI6MTQ5NTIyMzc2NiwibmJmIjoxNDk1MjIwMTY2LCJqdGkiOiJBWHE1bzA0QTA0ZDQxSjlWIn0.9QVDzm8ntsItpq8gDltRjQMIyzBSVgf3Iq58ZzZxK_w</string>
-    <string name="imageurl">http://de79a96c.ngrok.io/dbse/public/</string>
-    <string name="url">http://de79a96c.ngrok.io/dbse/public/api/v1/</string>
+    <string name="imageurl">http://5f6bba77.ngrok.io/dbse/public/</string>
+    <string name="url">http://5f6bba77.ngrok.io/dbse/public/api/v1/</string>
     <string name="your_string_here">
         <u>LocationOnMap</u>.
     </string>

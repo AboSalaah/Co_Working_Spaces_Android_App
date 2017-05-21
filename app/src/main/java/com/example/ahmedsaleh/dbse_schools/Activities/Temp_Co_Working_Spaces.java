@@ -58,6 +58,9 @@ public class Temp_Co_Working_Spaces extends AppCompatActivity {
     public static String password=new String();
     private JSONObject jsonObject;
     private Spinner moneey;
+    private JSONObject selectWS;
+    private JSONObject userData;
+    private Co_Working_Space coWorkingSpace;
     String govname;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,14 +84,18 @@ public class Temp_Co_Working_Spaces extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Co_Working_Space coWorkingSpace=(Co_Working_Space) parent.getItemAtPosition(position);
+               coWorkingSpace=(Co_Working_Space) parent.getItemAtPosition(position);
                 //here i'll send to nasr the request
                 if(!coWorkingSpaceAdapter.isEmpty())
                 {
                     Url.setLength(0);
-                    Url.append(getString(R.string.url)+"workspaceverfiy");
-                    params=new HashMap<String, String>();
-                    params.put("workspace_id",coWorkingSpace.getmId());
+                    Url.append(getString(R.string.url)+"workspaceverify");
+                    selectWS=new JSONObject();
+                    try {
+                        selectWS.put("workspace_id",Integer.valueOf(coWorkingSpace.getmId()));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                     connectoToVerfifyWorkSpace();
                     //verifyWorkspaceEmail();
                 }
@@ -174,8 +181,14 @@ public class Temp_Co_Working_Spaces extends AppCompatActivity {
     void connectoToVerfifyWorkSpace()
     {
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        JSONObject parameter = new JSONObject(params);
+        JSONObject parameter = null;
+        try {
+            parameter = new JSONObject(selectWS.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         OkHttpClient client = new OkHttpClient();
+        Log.i("mytagselectworkspace",parameter.toString());
         RequestBody body = RequestBody.create(JSON, parameter.toString());
         Request request = new Request.Builder()
                 .url(Url.toString())
@@ -244,7 +257,21 @@ public class Temp_Co_Working_Spaces extends AppCompatActivity {
                     Url.setLength(0);
                     Url.append(getString(R.string.url)+"signup");
                     dialog.dismiss();
-                       connectToPost();
+                    userData=new JSONObject();
+                    try {
+                        userData.put("type",userType);
+                        userData.put("username",username);
+                        userData.put("email",email);
+                        userData.put("password",password);
+                        userData.put("phone",phoneNumber);
+                        userData.put("name",realName);
+                        userData.put("gender",gender);
+                        userData.put("workspace_id",Integer.valueOf(coWorkingSpace.getmId()));
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    connectToPost();
                 } else {
 
                     Toast.makeText(Temp_Co_Working_Spaces.this, "Wrong Code", Toast.LENGTH_LONG).show();
@@ -265,7 +292,13 @@ public class Temp_Co_Working_Spaces extends AppCompatActivity {
 
     void connectToPost() {
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        JSONObject parameter = new JSONObject(params);
+        JSONObject parameter = null;
+        try {
+            Log.i("mytaguserdata",userData.toString());
+            parameter = new JSONObject(userData.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         OkHttpClient client = new OkHttpClient();
         RequestBody body = RequestBody.create(JSON, parameter.toString());
         Request request = new Request.Builder()

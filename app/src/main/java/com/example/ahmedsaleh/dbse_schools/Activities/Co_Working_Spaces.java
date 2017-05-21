@@ -110,8 +110,13 @@ public class Co_Working_Spaces extends AppCompatActivity {
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                Toast.makeText(getApplicationContext(), getString(R.string.connectionproblem),
-                        Toast.LENGTH_LONG).show();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), getString(R.string.connectionproblem),
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
             }
 
             @Override

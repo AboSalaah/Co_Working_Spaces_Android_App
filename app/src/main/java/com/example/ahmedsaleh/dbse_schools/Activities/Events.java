@@ -77,6 +77,7 @@ public class Events extends AppCompatActivity {
         addEventButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                OpenAddEventDialog();
 
             }
         });
@@ -155,7 +156,7 @@ public class Events extends AppCompatActivity {
     void OpenAddEventDialog()
     {
         Url.setLength(0);
-        Url.append(getString(R.string.url)+"event?token="+getString(R.string.token));
+        Url.append(getString(R.string.url)+"event?token="+SignIn.token);
         final AlertDialog.Builder mBuilder=new AlertDialog.Builder(Events.this);
         final View mview=getLayoutInflater().inflate(R.layout.new_event_dialog,null);
         mBuilder.setPositiveButton(R.string.submit, new DialogInterface.OnClickListener() {
@@ -174,6 +175,7 @@ public class Events extends AppCompatActivity {
                 // User clicked OK button
 
                 dialog.dismiss();
+                AddEventConnection();
             }
         });
         mBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -203,7 +205,13 @@ public class Events extends AppCompatActivity {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), getString(R.string.connectionproblem),
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
             }
 
             @Override
@@ -216,6 +224,9 @@ public class Events extends AppCompatActivity {
                             JSONObject jsonObject=new JSONObject(result);
                             String msg=jsonObject.getString("msg");
                             Toast.makeText(Events.this,msg,Toast.LENGTH_LONG).show();
+                            Url.setLength(0);
+                            Url.append(getString(R.string.url)+"workspaceevents/"+workspaceid+"?token="+SignIn.token);
+                            connect();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

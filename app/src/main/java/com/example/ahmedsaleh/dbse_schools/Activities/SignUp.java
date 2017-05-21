@@ -303,6 +303,7 @@ public class SignUp extends AppCompatActivity {
             @Override
             public void onResponse(okhttp3.Call call, final Response response) throws IOException {
                 result = response.body().string().toString();
+                Log.i("mytagsignupverify",result);
                 Log.v("Response code", String.valueOf(response.code()));
                 runOnUiThread(new Runnable() {
                     @Override

@@ -227,6 +227,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/co_working_space_profile_events_label"
             style="@style/labels_profile_style"
+            android:text="Events"
             />
         <Button
             android:layout_width="match_parent"
@@ -251,7 +252,19 @@
             style="@style/item_attributes"
             />
 
-
+         <TextView
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             style="@style/labels_profile_style"
+             android:text="Preferences"
+             android:id="@+id/co_working_space_profile_preferences_label"
+             />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/co_working_space_profile_preferences"
+            style="@style/item_attributes"
+            />
 
         <TextView
             android:layout_width="match_parent"
@@ -294,6 +307,17 @@
         android:src="@android:drawable/ic_menu_edit"
         app:layout_anchor="@id/ws_profile_scroll_view"
         app:layout_anchorGravity="bottom|right|end"
+        app:backgroundTint="@color/buttonsignupcolor"
+        />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:src="@android:drawable/ic_menu_revert"
+        app:layout_anchor="@id/ws_profile_scroll_view"
+        app:layout_anchorGravity="top|right|end"
         app:backgroundTint="@color/buttonsignupcolor"
         />
 

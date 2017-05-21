@@ -17,6 +17,7 @@ import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.example.ahmedsaleh.dbse_schools.Adapters.ImageSliderAdapter;
+import com.example.ahmedsaleh.dbse_schools.Fragments.HomeFragement;
 import com.example.ahmedsaleh.dbse_schools.Helpers.Co_Working_Space;
 import com.example.ahmedsaleh.dbse_schools.Helpers.QueryUtils;
 import com.example.ahmedsaleh.dbse_schools.R;
@@ -57,6 +58,7 @@ public class Co_Working_Space_Profile extends YouTubeBaseActivity {
     private double finalRating;
     public static String userType="def";
     FloatingActionButton editWorkSpace;
+    FloatingActionButton returnToHome;
     private Button co_working_space_events_button;
     private String havews="false";
     private JSONObject ratinng;
@@ -73,6 +75,7 @@ public class Co_Working_Space_Profile extends YouTubeBaseActivity {
         final String co_working_spaceid=intent.getStringExtra("id");
         havews=intent.getStringExtra("have");
         editWorkSpace=(FloatingActionButton)findViewById(R.id.fab);
+        returnToHome=(FloatingActionButton)findViewById(R.id.fab_home);
         co_working_space_events_button=(Button)findViewById(R.id.co_working_space_profile_events_button);
         co_working_space_events_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +94,13 @@ public class Co_Working_Space_Profile extends YouTubeBaseActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Co_Working_Space_Profile.this,Edit_CoWorkingSpace.class);
+                startActivity(i);
+            }
+        });
+        returnToHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Co_Working_Space_Profile.this,MainActivity.class);
                 startActivity(i);
             }
         });
@@ -166,6 +176,7 @@ public class Co_Working_Space_Profile extends YouTubeBaseActivity {
             movToEditWorkSpaceActivity();
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
     private void movToEditWorkSpaceActivity() {
@@ -459,6 +470,27 @@ public class Co_Working_Space_Profile extends YouTubeBaseActivity {
                             {
                                 email.setVisibility(View.GONE);
                                 emaillabel.setVisibility(View.GONE);
+                            }
+                            TextView preferences=(TextView)findViewById(R.id.co_working_space_profile_preferences);
+                            TextView preferenceslabel=(TextView)findViewById(R.id.co_working_space_profile_preferences_label);
+                            String temp="";
+                            if(jsonObject1.getInt("air_conditioning")==1)temp+=getString(R.string.air_condition)+"\n";
+                            if(jsonObject1.getInt("private_rooms")==1)temp+=getString(R.string.private_rooms)+"\n";
+                            if(jsonObject1.getInt("data_show")==1)temp+=getString(R.string.data_show)+"\n";
+                            if(jsonObject1.getInt("wifi")==1)temp+=getString(R.string.wifi)+"\n";
+                            if(jsonObject1.getInt("laser_cutter")==1)temp+=getString(R.string.laser_cutter)+"\n";
+                            if(jsonObject1.getInt("printing_3D")==1)temp+=getString(R.string.printing_3d)+"\n";
+                            if(jsonObject1.getInt("PCB_printing")==1)temp+=getString(R.string.pcb_printing)+"\n";
+                            if(jsonObject1.getInt("girls_area")==1)temp+=getString(R.string.girls_area)+"\n";
+                            if(jsonObject1.getInt("smoking_area")==1)temp+=getString(R.string.smoking_area)+"\n";
+                            if(jsonObject1.getInt("cyber")==1)temp+=getString(R.string.cyber)+"\n";
+                            if(jsonObject1.getInt("cafeteria")==1)temp+=getString(R.string.cafeteria)+"\n";
+                            if(!temp.isEmpty())
+                            preferences.setText(temp);
+                            else
+                            {
+                                preferences.setVisibility(View.GONE);
+                                preferenceslabel.setVisibility(View.GONE);
                             }
 
 

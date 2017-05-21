@@ -101,8 +101,8 @@ public class ViewProfileFragement extends Fragment {
                             firstLetter.setText(String.valueOf(Character.toUpperCase(json.getString("name").charAt(0))));
                             TextView username = (TextView) getActivity().findViewById(R.id.username_viewprofile2);
                             username.setText(json.get("username").toString());
-                            TextView gender = (TextView) getActivity().findViewById(R.id.Gender_viewprofile2);
-                            gender.setText(json.get("gender").toString());
+                           // TextView gender = (TextView) getActivity().findViewById(R.id.Gender_viewprofile2);
+                            //gender.setText(json.get("gender").toString());
                         } catch (JSONException e) {
 
                             e.printStackTrace();

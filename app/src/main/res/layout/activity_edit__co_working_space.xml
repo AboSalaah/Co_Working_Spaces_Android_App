@@ -26,9 +26,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Link of Youtube Video"/>
+            android:text="Type"/>
         <EditText
-            android:id="@+id/Link_Video_editText"
+            android:id="@+id/Workspace_type_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ID of Youtube Video"/>
+        <EditText android:id="@+id/Link_Video_editText"
          android:layout_width="match_parent"
          android:layout_height="wrap_content" />
 

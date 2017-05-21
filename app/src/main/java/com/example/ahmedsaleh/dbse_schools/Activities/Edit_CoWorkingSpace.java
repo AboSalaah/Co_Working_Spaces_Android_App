@@ -48,6 +48,7 @@ public class Edit_CoWorkingSpace extends AppCompatActivity {
     CheckBox smokingAreasCheckbox;
     CheckBox cafeteriaCheckbox;
     CheckBox cyberCheckbox;
+    EditText workspacetype;
 
 
     private StringBuilder Url=new StringBuilder();
@@ -76,6 +77,7 @@ public class Edit_CoWorkingSpace extends AppCompatActivity {
          smokingAreasCheckbox = (CheckBox) findViewById(R.id.smoking_area_check_box_editprofile);
          cafeteriaCheckbox = (CheckBox) findViewById(R.id.cafeteria_checkbox_editprofile);
          cyberCheckbox = (CheckBox) findViewById(R.id.cyber_check_box_editprofile);
+        workspacetype=(EditText)findViewById(R.id.Workspace_type_editText);
 
 
         Url = new StringBuilder(getString(R.string.url)+"workspace/"+SignIn.workSpaceId+"?token=");
@@ -115,8 +117,13 @@ public class Edit_CoWorkingSpace extends AppCompatActivity {
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                Toast.makeText(getApplicationContext(), getString(R.string.connectionproblem),
-                        Toast.LENGTH_LONG).show();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), getString(R.string.connectionproblem),
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
             }
 
             @Override
@@ -129,13 +136,14 @@ public class Edit_CoWorkingSpace extends AppCompatActivity {
                             Log.i("tag","resulttttt "+result);
                             JSONObject jsonObject=new JSONObject(result);
                             JSONObject jsonObject1 = jsonObject.getJSONObject("workspace");
-                            nameEditText.setText(jsonObject1.get("name").toString());
-                            linkVideoEditText.setText(jsonObject1.get("video").toString());
-                            contactsEditText.setText(jsonObject1.get("contacts").toString());
-                            websiteEditText.setText(jsonObject1.get("website_url").toString());
-                            facebookEditText.setText(jsonObject1.get("facebook_page").toString());
-                            descriptionEditText.setText(jsonObject1.get("description").toString());
-                            classificationEditText.setText(jsonObject1.get("classification").toString());
+                            nameEditText.setText(jsonObject1.getString("name"));
+                            linkVideoEditText.setText(jsonObject1.getString("video"));
+                            contactsEditText.setText(jsonObject1.getString("contacts"));
+                            websiteEditText.setText(jsonObject1.getString("website_url"));
+                            facebookEditText.setText(jsonObject1.getString("facebook_page"));
+                            descriptionEditText.setText(jsonObject1.getString("description"));
+                            classificationEditText.setText(jsonObject1.getString("classification"));
+                            workspacetype.setText(jsonObject1.getString("type"));
 
                             if(Integer.parseInt(jsonObject1.get("air_conditioning").toString()) == 1)airConditioningCheckbox.toggle();
                             if(Integer.parseInt(jsonObject1.get("private_rooms").toString()) == 1)privateRoomsCheckbox.toggle();
@@ -164,24 +172,18 @@ public class Edit_CoWorkingSpace extends AppCompatActivity {
 
     void connectToPost() {
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        String link = String.valueOf(linkVideoEditText.getText());
-        String videoId = extractYTId(link);
-        for (int i=link.length()-1; i >= 0 ; i--){
-            if(!((link.charAt(i) >= 'a' && link.charAt(i) <= 'z')||(link.charAt(i) >= 'A' && link.charAt(i) <= 'Z'))){
-                break;
-            }
-            videoId = link.charAt(i)+videoId;
-        }
+        String link = String.valueOf(linkVideoEditText.getText().toString());
 
         try {
-            json.put("name", String.valueOf(nameEditText.getText()));
-            json.put("video",videoId);
-            json.put("contacts", String.valueOf(contactsEditText.getText()));
-            json.put("website_url", String.valueOf(websiteEditText.getText()));
-            json.put("facebook_page", String.valueOf(facebookEditText.getText()));
-            json.put("description", String.valueOf(descriptionEditText.getText()));
-            json.put("classification", String.valueOf(classificationEditText.getText()));
-
+            json=new JSONObject();
+            json.put("name", String.valueOf(nameEditText.getText().toString()));
+            json.put("video",link);
+            json.put("contacts", String.valueOf(contactsEditText.getText().toString()));
+            json.put("website_url", String.valueOf(websiteEditText.getText().toString()));
+            json.put("facebook_page", String.valueOf(facebookEditText.getText().toString()));
+            json.put("description", String.valueOf(descriptionEditText.getText().toString()));
+            json.put("classification", String.valueOf(classificationEditText.getText().toString()));
+            json.put("type",workspacetype.getText().toString());
             if(airConditioningCheckbox.isChecked())json.put("air_conditioning",1); else json.put("air_conditioning",0);
             if(privateRoomsCheckbox.isChecked())json.put("private_rooms",1); else json.put("private_rooms",0);
             if(datashowCheckbox.isChecked())json.put("data_show",1); else json.put("data_show",0);
@@ -192,6 +194,7 @@ public class Edit_CoWorkingSpace extends AppCompatActivity {
             if(girlsAreasCheckbox.isChecked())json.put("girls_area",1); else json.put("girls_area",0);
             if(smokingAreasCheckbox.isChecked())json.put("smoking_area",1); else json.put("smoking_area",0);
             if(cyberCheckbox.isChecked())json.put("cyber",1); else json.put("cyber",0);
+            if(cafeteriaCheckbox.isChecked())json.put("cafeteria",1); else json.put("cafeteria",0);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -200,14 +203,11 @@ public class Edit_CoWorkingSpace extends AppCompatActivity {
 
 
 
-        try {
-            json.put("id", String.valueOf(SignIn.id));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+
         JSONObject parameter = null;
         try {
             parameter = new JSONObject(String.valueOf(json));
+            Log.i("mytagworkspace",json.toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -253,16 +253,6 @@ public class Edit_CoWorkingSpace extends AppCompatActivity {
         });
     }
 
-    public static String extractYTId(String ytUrl) {
-        String vId = null;
-        Pattern pattern = Pattern.compile(
-                "^https?://.*(?:youtu.be/|v/|u/\\w/|embed/|watch?v=)([^#&?]*).*$",
-                Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(ytUrl);
-        if (matcher.matches()){
-            vId = matcher.group(1);
-        }
-        return vId;
-    }
+
 
 }

@@ -38,12 +38,14 @@
             android:textColor="@color/eventcolor"
             />
         <EditText
-            android:layout_width="1dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/event_profile_name_edit_text"
             android:visibility="gone"
             android:layout_marginTop="@dimen/textview_event_profile"
             android:textSize="30sp"
+            android:layout_weight="1"
+            android:background="@color/white"
             />
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_event_name"
@@ -79,12 +81,14 @@
             android:textColor="@color/eventcolor"
             />
         <EditText
-            android:layout_width="1dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/event_profile_address_edit_text"
             android:layout_marginTop="@dimen/textview_event_profile"
             android:visibility="gone"
             android:textSize="30sp"
+            android:layout_weight="1"
+            android:background="@color/white"
             />
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_event_address"
@@ -121,12 +125,14 @@
             android:textColor="@color/eventcolor"
             />
         <EditText
-            android:layout_width="1dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/event_profile_desc_edit_text"
             android:layout_marginTop="@dimen/textview_event_profile"
             android:visibility="gone"
             android:textSize="30sp"
+            android:layout_weight="1"
+            android:background="@color/white"
             />
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_event_desc"

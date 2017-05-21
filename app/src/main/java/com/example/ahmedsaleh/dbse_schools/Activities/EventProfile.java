@@ -124,31 +124,31 @@ public class EventProfile extends AppCompatActivity {
                 if(eventaddresss.getVisibility()!=View.GONE)
                 {
                     if(!eventaddresss.getText().toString().isEmpty())
-                    finaleventname=eventaddresss.getText().toString();
+                    finaleventaddress=eventaddresss.getText().toString();
                     else
                     {
-                        eventaddresss.setError("Event Name "+(getString(R.string.emptyerror)));
+                        eventaddresss.setError("Event Address "+(getString(R.string.emptyerror)));
                         ok=false;
                     }
                 }
                 else
                 {
-                    finaleventname=eventaddress.getText().toString();
+                    finaleventaddress=eventaddress.getText().toString();
                 }
                 if(eventdescc.getVisibility()!=View.GONE)
                 {
-                    if(eventdescc.getText().toString().isEmpty())
-                    finaleventname=eventdescc.getText().toString();
+                    if(!eventdescc.getText().toString().isEmpty())
+                    finaleventdesc=eventdescc.getText().toString();
                     else
                     {
-                        eventdescc.setError("Event Name "+(getString(R.string.emptyerror)));
+                        eventdescc.setError("Event Description "+(getString(R.string.emptyerror)));
                         ok=false;
                     }
 
                 }
                 else
                 {
-                    finaleventname=eventdesc.getText().toString();
+                    finaleventdesc=eventdesc.getText().toString();
                 }
                 if(ok) {
                     params.clear();
@@ -160,7 +160,7 @@ public class EventProfile extends AppCompatActivity {
                     eventdescc.setVisibility(View.GONE);
                     eventname.setVisibility(View.VISIBLE);
                     eventaddress.setVisibility(View.VISIBLE);
-                    eventdescc.setVisibility(View.VISIBLE);
+                    eventdesc.setVisibility(View.VISIBLE);
                     eventname.setText(finaleventname);
                     eventaddress.setText(finaleventaddress);
                     eventdesc.setText(finaleventdesc);
@@ -237,6 +237,7 @@ public class EventProfile extends AppCompatActivity {
     {
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         JSONObject parameter = new JSONObject(params);
+        Log.i("mytageventprofil",parameter.toString());
         OkHttpClient client = new OkHttpClient();
         RequestBody body = RequestBody.create(JSON, parameter.toString());
         Request request = new Request.Builder()

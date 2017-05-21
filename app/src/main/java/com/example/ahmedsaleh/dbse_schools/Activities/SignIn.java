@@ -170,10 +170,20 @@ public class SignIn extends AppCompatActivity {
 
     void connectForgetPassword(){
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        Map<String, String> params = new HashMap<String, String>();
-        JSONObject parameter = new JSONObject(params);
+        JSONObject jsonObject=new JSONObject();
+        try {
+            jsonObject.put("email",emailForgetPassword.getText().toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JSONObject parameter = null;
+        try {
+            parameter = new JSONObject(jsonObject.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.i("mytagforgetpasswordana",parameter.toString());
 
-        params.put("email",emailForgetPassword.getText().toString());
         OkHttpClient client = new OkHttpClient();
         RequestBody body = RequestBody.create(JSON, parameter.toString());
         Request request = new Request.Builder()
@@ -195,14 +205,27 @@ public class SignIn extends AppCompatActivity {
             public void onResponse(okhttp3.Call call, final Response response) throws IOException {
                 result = response.body().string().toString();
                 Log.v("Response code", String.valueOf(response.code()));
+                Log.i("mytagforget",result);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         try {
                             JSONObject json = new JSONObject(result);
-                            String msg = json.get("msg").toString();
+                           if(json.has("msg")) {String msg = json.get("msg").toString();
                             Log.v("message",msg);
-                            Toast.makeText(SignIn.this,msg, Toast.LENGTH_LONG).show();
+                            Toast.makeText(SignIn.this,msg, Toast.LENGTH_LONG).show();}
+                            if(json.has("email"))
+                            {
+                                String msg = json.get("email").toString();
+                                Log.v("message",msg);
+                                Toast.makeText(SignIn.this,msg, Toast.LENGTH_LONG).show();
+                            }
+                            if(json.has("error"))
+                            {
+                                String msg = json.get("error").toString();
+                                Log.v("message",msg);
+                                Toast.makeText(SignIn.this,msg, Toast.LENGTH_LONG).show();
+                            }
                         } catch (JSONException e) {
                             Toast.makeText(SignIn.this,"The selected email is invalid!", Toast.LENGTH_LONG).show();
                             e.printStackTrace();
