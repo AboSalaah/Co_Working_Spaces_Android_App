@@ -222,11 +222,16 @@ public class Events extends AppCompatActivity {
                     public void run() {
                         try {
                             JSONObject jsonObject=new JSONObject(result);
-                            String msg=jsonObject.getString("msg");
+                           if(jsonObject.has("msg")) {String msg=jsonObject.getString("msg");
                             Toast.makeText(Events.this,msg,Toast.LENGTH_LONG).show();
                             Url.setLength(0);
                             Url.append(getString(R.string.url)+"workspaceevents/"+workspaceid+"?token="+SignIn.token);
-                            connect();
+                            connect();}
+                            if(jsonObject.has("error"))
+                            {
+                                String msg=jsonObject.getString("error");
+                                Toast.makeText(Events.this,msg,Toast.LENGTH_LONG).show();
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

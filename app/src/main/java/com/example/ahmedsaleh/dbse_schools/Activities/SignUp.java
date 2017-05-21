@@ -311,9 +311,15 @@ public class SignUp extends AppCompatActivity {
 
                         try {
                             JSONObject json = new JSONObject(result);
-                            confirmCode = json.get("code").toString();
-                            Toast.makeText(SignUp.this, json.get("msg").toString(), Toast.LENGTH_LONG).show();
-                            verifyemail();
+                           if(json.has("code")) {
+                               confirmCode = json.get("code").toString();
+                               Toast.makeText(SignUp.this, json.get("msg").toString(), Toast.LENGTH_LONG).show();
+                               verifyemail();
+                           }
+                            if(json.has("error"))
+                            {
+                                Toast.makeText(SignUp.this, json.get("error").toString(), Toast.LENGTH_LONG).show();
+                            }
 
                         } catch (JSONException e) {
                             Toast.makeText(SignUp.this,"sending to this email failed!", Toast.LENGTH_LONG).show();
